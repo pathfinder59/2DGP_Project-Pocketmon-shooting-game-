@@ -5,4 +5,4 @@ GAME_HEIGHT = 875
 GAME_WIDTH = 590
 pico2d.open_canvas(GAME_WIDTH,GAME_HEIGHT)
 game_framework.run(start_state)
-pico2d.close_canvas() 
+pico2d.close_canvas()
