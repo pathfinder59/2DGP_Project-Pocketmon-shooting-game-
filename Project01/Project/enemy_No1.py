@@ -29,7 +29,8 @@ class Enemy01(Character):
         self.pattern=random.randint(1,2)
         self.frame=random.randint(0,4)
         self.arriveY=random.randint(600,820)
-        self.time=0
+        self.time=pico2d.get_time()
+        self.bit=-1
         self.shoot_time=0
         self.shoot_angle=0
         self.angle_rate=0
@@ -38,9 +39,6 @@ class Enemy01(Character):
         self.cur_state.enter(self)
 
     def update(self,P_bullet_list,player,E_bullet_list):
-        #self.time=(self.time+1)%10
-        #if self.time%10==0:
-            #self.frame=(self.frame+1)%3
         self.frame=(self.frame+FRAMES_PER_ENEMY*ACTION_PER_TIME*game_framework.frame_time)%3
         i=0
         while i < len(P_bullet_list):
@@ -49,7 +47,7 @@ class Enemy01(Character):
                 del P_bullet_list[i]
             else:
                 i=i+1
-        if self.hp<0:
+        if self.hp<0 or (self.bit==1 and self.y>890):
             return True
         if len(self.event_que) > 0:
             event = self.event_que.pop()
@@ -83,7 +81,7 @@ class MoveState:
     @staticmethod
 
     def update(Enemy,E_bullet_list,player):
-        Enemy.y = Enemy.y - RUN_SPEED_PPS*game_framework.frame_time
+        Enemy.y = Enemy.y +Enemy.bit*RUN_SPEED_PPS*game_framework.frame_time
 
         if Enemy.y <= Enemy.arriveY:
             Enemy.add_event(IdleState)
@@ -107,6 +105,9 @@ class IdleState:
         if pico2d.get_time()-Enemy.shoot_time>=0.4 :
             Enemy.add_event(ShootState)
             pass
+        if pico2d.get_time()-Enemy.time>=12:
+            Enemy.bit=1
+            Enemy.add_event(MoveState)
     @staticmethod
     def draw(Enemy):
         Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)

@@ -134,7 +134,7 @@ def update():
     elif int(pico2d.get_time()-E_time)==3:
         E_time=pico2d.get_time()
         for i in range(count):
-            Enemy_list.append(Enemy_table[random.randint(0,3)](random.randint(20,550),GAME_HEIGHT+15))
+            Enemy_list.append(Enemy_table[random.randint(0,0)](random.randint(20,550),GAME_HEIGHT+15))
 
 
 
