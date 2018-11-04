@@ -23,7 +23,7 @@ FRAMES_PER_ENEMY = 3
 
 class Enemy01(Character):
     def __init__(self, x, y):
-        super().__init__(x, y,10)
+        super().__init__(x, y,7)
         Enemy01.image=load_image('trainner.png')
         self.type=0
         self.pattern=random.randint(1,2)
