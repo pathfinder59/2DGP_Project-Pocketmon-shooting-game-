@@ -28,7 +28,8 @@ class Enemy03(Character):
         self.pattern=random.randint(1,2)
         self.frame=random.randint(0,4)
         self.arriveY=random.randint(600,820)
-        self.time=0
+        self.time = pico2d.get_time()
+        self.bit = -1
         self.shoot_time=0
         self.shoot_angle=0
         self.angle_rate=0.05
@@ -48,7 +49,7 @@ class Enemy03(Character):
                 del P_bullet_list[i]
             else:
                 i=i+1
-        if self.hp<0:
+        if self.hp<0 or (self.bit==1 and self.y>890):
             return True
         if len(self.event_que) > 0:
             event = self.event_que.pop()
@@ -106,6 +107,9 @@ class IdleState:
         if pico2d.get_time()-Enemy.shoot_time>=0.5 :
             Enemy.add_event(ShootState)
             pass
+        if pico2d.get_time()-Enemy.time>=12:
+            Enemy.bit=1
+            Enemy.add_event(MoveState)
     @staticmethod
     def draw(Enemy):
         Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
