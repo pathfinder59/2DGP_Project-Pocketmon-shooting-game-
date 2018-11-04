@@ -83,7 +83,7 @@ class MoveState:
     @staticmethod
 
     def update(Enemy,E_bullet_list,player):
-        Enemy.y = Enemy.y - RUN_SPEED_PPS*game_framework.frame_time
+        Enemy.y = Enemy.y +Enemy.bit*RUN_SPEED_PPS*game_framework.frame_time
 
         if Enemy.y <= Enemy.arriveY:
             Enemy.add_event(IdleState)
