@@ -109,6 +109,9 @@ class IdleState:
         if pico2d.get_time()-Enemy.shoot_time>=0.2 :
             Enemy.add_event(ShootState)
             pass
+        if pico2d.get_time()-Enemy.time>=12:
+            Enemy.bit=1
+            Enemy.add_event(MoveState)
     @staticmethod
     def draw(Enemy):
         Enemy.image.clip_draw(int(Enemy.frame)  * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
