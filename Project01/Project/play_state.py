@@ -85,7 +85,8 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.push_state(over_state)
         elif event.type==SDL_KEYDOWN and event.key==SDLK_SPACE:
-            player.skill()
+            if player.skillSwitch==False:
+                player.skill()
         else:
             player.handle_event(event)
 
