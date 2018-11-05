@@ -41,11 +41,12 @@ def pause():
     pass
 
 def enter():
-    global screen,score,player,life,P_bullet_list,E_time,B_time
+    global screen,score,player,life,P_bullet_list,E_time,B_time,count
     screen=load_image('GAMEPrint.png')
     player=Player(590/2,100,3,start_state.character)
     P_bullet_list = [P_bullet(player.x,player.y)]
     score=Score()
+    count = 1
     life=Life()
     E_time=pico2d.get_time()
     B_time = pico2d.get_time()
@@ -128,7 +129,7 @@ def update():
     #E_time=(E_time+1)%2000
     if int(pico2d.get_time()-B_time)==30:
         B_time=pico2d.get_time()
-        if count<4:
+        if count<3:
             count+=1
         Enemy_list.append(Enemy_table[4](random.randint(20,550), GAME_HEIGHT + 15))
 
