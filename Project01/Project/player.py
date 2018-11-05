@@ -24,12 +24,12 @@ key_event_table = {
     (SDL_KEYUP, SDLK_LSHIFT): SHIFT_UP
 }
 PIXEL_PER_METER = (10.0 / 0.3) # 10 pixel 30 cm
-RUN_SPEED_KMPH = 20 # Km / Hour
+RUN_SPEED_KMPH = 30 # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-SLOW_SPEED_KMPH = 7 # Km / Hour
+SLOW_SPEED_KMPH = 15 # Km / Hour
 SLOW_SPEED_MPM = (SLOW_SPEED_KMPH * 1000.0 / 60.0)
 SLOW_SPEED_MPS = (SLOW_SPEED_MPM / 60.0)
 SLOW_SPEED_PPS = (SLOW_SPEED_MPS * PIXEL_PER_METER)
@@ -157,7 +157,7 @@ class Player(Character):
                 if self.hp==0:   #게임오버 실행
                     return False
                     pass
-        if pico2d.get_time()-self.count>=0.2 :  #일종의 타이머로 총알 생성
+        if pico2d.get_time()-self.count>=0.15 :  #일종의 타이머로 총알 생성
             P_bullet_list.append(P_bullet(self.x, self.y))
             self.count=get_time()
         self.cur_state.update(self)
