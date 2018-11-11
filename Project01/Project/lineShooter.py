@@ -21,10 +21,10 @@ TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ENEMY = 3
 
-class Enemy01(Character):
+class LineShooter(Character):
     def __init__(self, x, y):
         super().__init__(x, y,7)
-        Enemy01.image=load_image(fileLink+'Character\\trainner.png')
+
         self.type=0
         self.pattern=random.randint(1,2)
         self.frame=random.randint(0,4)

@@ -20,11 +20,11 @@ TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ENEMY = 3
 
-class Enemy04(Character):
+class SpinShooter(Character):
     def __init__(self, x, y):
-        super().__init__(x, y,10)
-        Enemy04.image=load_image(fileLink+'Character\\trainner.png')
-        self.type=3
+        super().__init__(x, y,8)
+
+        self.type=2
         self.pattern=random.randint(1,2)
         self.frame=random.randint(0,4)
         self.arriveY=random.randint(600,820)
@@ -32,7 +32,7 @@ class Enemy04(Character):
         self.bit = -1
         self.shoot_time=0
         self.shoot_angle=0
-        self.angle_rate=0
+        self.angle_rate=0.05
         self.event_que = []
         self.cur_state = MoveState
         self.cur_state.enter(self)
@@ -84,12 +84,13 @@ class MoveState:
 
     def update(Enemy,E_bullet_list,player):
         Enemy.y = Enemy.y +Enemy.bit*RUN_SPEED_PPS*game_framework.frame_time
+
         if Enemy.y <= Enemy.arriveY:
             Enemy.add_event(IdleState)
 
     @staticmethod
     def draw(Enemy):
-        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
+        Enemy.image.clip_draw(int(Enemy.frame)* 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
 
     pass
 
@@ -123,14 +124,8 @@ class ShootState:
     @staticmethod
     def update(Enemy,E_bullet_list,player):
    ##타입 0 총알생성
-        Enemy.shoot_angle= -math.atan2(player.y-Enemy.y,player.x-Enemy.x)/3.1415/2
-
-        if Enemy.pattern==1:
-            E_bullet_list.append(E_bullet(Enemy.x,Enemy.y,Enemy.shoot_angle,0,2,0))
-            pass
-        elif Enemy.pattern==2:
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 3, 0))
-            pass
+        E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, -0.0005, 2, 0.0002))
+        Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
         Enemy.add_event(IdleState)
 
     @staticmethod

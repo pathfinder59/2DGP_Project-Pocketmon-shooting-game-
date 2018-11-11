@@ -8,8 +8,8 @@ import math
 from character import Character
 import game_framework
 from p_bullet import E_bullet
-
 MOVE,IDLE,SHOOT=range(3)
+fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 
 PIXEL_PER_METER = (10.0 / 0.3) # 10 pixel 30 cm
 RUN_SPEED_KMPH = 13 # Km / Hour
@@ -20,20 +20,19 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ENEMY = 3
-fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
-class Enemy05(Character):
+
+class PinWheelShooter(Character):
     def __init__(self, x, y):
-        super().__init__(x, y,15)
-        Enemy05.image=load_image(fileLink+'Character\\trainner.png')
-        self.type=4
+        super().__init__(x, y,10)
+
+        self.type=1
         self.pattern=random.randint(1,2)
         self.frame=random.randint(0,4)
         self.arriveY=random.randint(600,820)
-        self.time = pico2d.get_time()
-        self.bit = -1
+        self.time=pico2d.get_time()
+        self.bit=-1
         self.shoot_time=0
         self.shoot_angle=0
-
         self.angle_rate=0.02
 
         self.event_que = []
@@ -41,14 +40,14 @@ class Enemy05(Character):
         self.cur_state.enter(self)
 
     def update(self,P_bullet_list,player,E_bullet_list):
-        # self.time=(self.time+1)%10
-        # if self.time%10==0:
-        # self.frame=(self.frame+1)%3
+        #self.time=(self.time+1)%10
+        #if self.time%10==0:
+        #    self.frame=(self.frame+1)%3
         self.frame = (self.frame + FRAMES_PER_ENEMY * ACTION_PER_TIME * game_framework.frame_time) % 3
-        i=0
 
+        i=0
         while i < len(P_bullet_list):
-            if math.sqrt((P_bullet_list[i].x-self.x)**2+(P_bullet_list[i].y-self.y)**2)<20 :
+            if math.sqrt((P_bullet_list[i].x-self.x)**2+(P_bullet_list[i].y-self.y)**2)<20:
                 self.hp=self.hp-player.attack
                 del P_bullet_list[i]
             else:
@@ -94,7 +93,7 @@ class MoveState:
 
     @staticmethod
     def draw(Enemy):
-        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
+        Enemy.image.clip_draw(int(Enemy.frame)  * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
 
     pass
 
@@ -116,7 +115,7 @@ class IdleState:
             Enemy.add_event(MoveState)
     @staticmethod
     def draw(Enemy):
-        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
+        Enemy.image.clip_draw(int(Enemy.frame)  * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
 
 
 class ShootState:
@@ -127,33 +126,18 @@ class ShootState:
 
     @staticmethod
     def update(Enemy,E_bullet_list,player):
-      #총알 생성
+      #타입 1 총알생성
         if Enemy.pattern==1:
             E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle + 0.5, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle + 0.25, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle + 0.75, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, -Enemy.shoot_angle, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, -Enemy.shoot_angle + 0.5, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, -Enemy.shoot_angle + 0.25, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, -Enemy.shoot_angle + 0.75, 0, 2, 0))
-
-
-            pass
         elif Enemy.pattern==2:
             E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle + 0.5, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle + 0.25, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle + 0.75, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, -(Enemy.shoot_angle+0.01), 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, -(Enemy.shoot_angle+0.01) + 0.5, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, -(Enemy.shoot_angle+0.01) + 0.25, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, -(Enemy.shoot_angle+0.01) + 0.75, 0, 2, 0))
-            pass
+            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.5, 0, 2, 0))
+            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.25, 0, 2, 0))
+            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.75, 0, 2, 0))
+
         Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
-        pass
         Enemy.add_event(IdleState)
 
     @staticmethod
     def draw(Enemy):
-        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
+        Enemy.image.clip_draw(int(Enemy.frame)  * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)

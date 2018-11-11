@@ -7,7 +7,7 @@ import math
 #import pause_state
 
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
-from p_bullet import P_bullet
+from gameBullet import Player_bullet
 from character import Character
 move_list=[]
 SKILL_COOLTIME={0:30,1:30,2:25}
@@ -160,7 +160,7 @@ class Player(Character):
                     return False
                     pass
         if pico2d.get_time()-self.count>=0.15 :  #일종의 타이머로 총알 생성
-            P_bullet_list.append(P_bullet(self.x, self.y))
+            P_bullet_list.append(Player_bullet(self.x, self.y))
             self.count=get_time()
         self.cur_state.update(self)
 

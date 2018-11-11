@@ -10,17 +10,21 @@ import start_state
 import over_state
 
 from player import Player
-from p_bullet import P_bullet
+from gameBullet import Player_bullet
+#from p_bullet import P_bullet
 from score import Score
 from life import Life
-from enemy_No1 import Enemy01
-from enemy_No2 import Enemy02
-from enemy_No3 import Enemy03
-from enemy_No4 import Enemy04
-from enemy_No5 import Enemy05
+
+from lineShooter import LineShooter
+from spinShooter import SpinShooter
+from pinWheelShooter import PinWheelShooter
+from flowerShooter import FlowerShooter
+from aimShooter import AimShooter
+
+
 
 Enemy_table={
-    0:Enemy01,1:Enemy02,2:Enemy03,3:Enemy04,4:Enemy05
+    0:LineShooter,1:PinWheelShooter,2:SpinShooter,3:AimShooter,4:FlowerShooter
 }
 GAME_HEIGHT = 875
 GAME_WIDTH = 590
@@ -44,7 +48,7 @@ def enter():
     global screen,score,player,life,P_bullet_list,E_time,B_time,count
     screen=load_image(fileLink+'Screen\\GAMEPrint.png')
     player=Player(590/2,100,3,start_state.character)
-    P_bullet_list = [P_bullet(player.x,player.y)]
+    P_bullet_list = [Player_bullet(player.x,player.y)]
     score=Score()
     count = 1
     life=Life()
