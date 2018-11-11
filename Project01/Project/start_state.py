@@ -1,7 +1,7 @@
 import game_framework
 from pico2d import *
 import play_state
-import drill06
+#import drill06
 GAME_HEIGHT= 875
 GAME_WIDTH= 590
 
