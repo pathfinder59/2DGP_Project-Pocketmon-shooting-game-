@@ -13,7 +13,6 @@ FRAMES_PER_LIFE = 3
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 class Life:
     def __init__(self):
-        self.count=0
         self.lFrame=0
         Life.image=load_image(fileLink+'Life\\Life.png')
     def update(self):
