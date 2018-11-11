@@ -6,6 +6,7 @@ from pico2d import *
 import math
 #import pause_state
 
+fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 from p_bullet import P_bullet
 from character import Character
 move_list=[]
@@ -113,8 +114,8 @@ class Player(Character):
         self.skillSwitch=False
         self.hitSwitch=False
         self.hitcount=0
-        Player.image = load_image('player1.png')
-        Player.skill_image=load_image('skill.png')
+        Player.image = load_image(fileLink+'Character\\player1.png')
+        Player.skill_image=load_image(fileLink+'Skill\\skill.png')
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0
