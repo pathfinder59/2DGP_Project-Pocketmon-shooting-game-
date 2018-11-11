@@ -7,7 +7,7 @@ import math
 #import pause_state
 from character import Character
 import game_framework
-from p_bullet import E_bullet
+from gameBullet import Enemy_bullet
 MOVE,IDLE,SHOOT=range(3)
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 PIXEL_PER_METER = (10.0 / 0.3) # 10 pixel 30 cm
@@ -126,10 +126,10 @@ class ShootState:
         Enemy.shoot_angle= -math.atan2(player.y-Enemy.y,player.x-Enemy.x)/3.1415/2
 
         if Enemy.pattern==1:
-            E_bullet_list.append(E_bullet(Enemy.x,Enemy.y,Enemy.shoot_angle,0,2,0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x,Enemy.y,Enemy.shoot_angle,0,2,0))
             pass
         elif Enemy.pattern==2:
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 3, 0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 3, 0))
             pass
         Enemy.add_event(IdleState)
 

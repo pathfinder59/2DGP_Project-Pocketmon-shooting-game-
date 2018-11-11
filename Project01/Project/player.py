@@ -42,7 +42,6 @@ FRAMES_PER_PLAYER = 9
 FRAMES_PER_SKILL = 10
 class IdleState:
     def enter(player):
-        #player.frame=0
         player.timer=1000
 
     def exit(player):

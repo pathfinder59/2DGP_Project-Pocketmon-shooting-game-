@@ -7,7 +7,7 @@ import math
 #import pause_state
 from character import Character
 import game_framework
-from p_bullet import E_bullet
+from gameBullet import Enemy_bullet
 MOVE,IDLE,SHOOT=range(3)
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 PIXEL_PER_METER = (10.0 / 0.3) # 10 pixel 30 cm
@@ -124,7 +124,7 @@ class ShootState:
     @staticmethod
     def update(Enemy,E_bullet_list,player):
    ##타입 0 총알생성
-        E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, -0.0005, 2, 0.0002))
+        E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, -0.0005, 2, 0.0002))
         Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
         Enemy.add_event(IdleState)
 

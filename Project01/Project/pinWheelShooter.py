@@ -7,7 +7,7 @@ import math
 #import pause_state
 from character import Character
 import game_framework
-from p_bullet import E_bullet
+from gameBullet import Enemy_bullet
 MOVE,IDLE,SHOOT=range(3)
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 
@@ -128,12 +128,12 @@ class ShootState:
     def update(Enemy,E_bullet_list,player):
       #타입 1 총알생성
         if Enemy.pattern==1:
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 2, 0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 2, 0))
         elif Enemy.pattern==2:
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.5, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.25, 0, 2, 0))
-            E_bullet_list.append(E_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.75, 0, 2, 0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 2, 0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.5, 0, 2, 0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.25, 0, 2, 0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.75, 0, 2, 0))
 
         Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
         Enemy.add_event(IdleState)

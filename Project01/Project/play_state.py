@@ -11,7 +11,7 @@ import over_state
 
 from player import Player
 from gameBullet import Player_bullet
-#from p_bullet import P_bullet
+
 from score import Score
 from life import Life
 
