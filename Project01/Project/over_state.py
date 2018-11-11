@@ -5,23 +5,23 @@ import play_state
 from score import Score
 
 name = "OverState"
-image = None
+back_groundImage = None
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 GAME_HEIGHT = 875
 GAME_WIDTH = 590
 
 
 def enter():
-    global image
-    image = load_image(fileLink+'Screen\\GAMEOVER.png')
+    global back_groundImage
+    back_groundImage = load_image(fileLink+'Screen\\GAMEOVER.png')
     pass
 
 def pause():
     pass
 
 def exit():
-    global image
-    del (image)
+    global back_groundImage
+    del (back_groundImage)
     pass
 
 def handle_events():
@@ -39,9 +39,9 @@ def update():
     pass
 
 def draw():
-    global image
+    global back_groundImage
     clear_canvas()
-    image.draw(590/2, 875/2)
+    back_groundImage.draw(590/2, 875/2)
     play_state.score.draw(400,30)
     update_canvas()
     pass

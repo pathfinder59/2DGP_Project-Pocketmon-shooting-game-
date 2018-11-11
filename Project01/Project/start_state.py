@@ -16,8 +16,8 @@ cursurY=50
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 
 def enter():
-    global image,Character1,Character2,Character3
-    image = load_image(fileLink+'Screen\\gamestart.png')
+    global back_groundImage,Character1,Character2,Character3
+    back_groundImage = load_image(fileLink+'Screen\\gamestart.png')
     Character1 = load_image(fileLink+'SelectImage\\CHAR1.png')
     Character2 = load_image(fileLink+'SelectImage\\CHAR2.png')
     Character3 = load_image(fileLink+'SelectImage\\CHAR3.png')
@@ -25,11 +25,11 @@ def enter():
 
 
 def exit():
-    global image,Character1,Character2,Character3
+    global back_groundImage,Character1,Character2,Character3
     del (Character1)
     del (Character2)
     del (Character3)
-    del (image)
+    del (back_groundImage)
     pass
 
 def pause():
@@ -74,10 +74,10 @@ def update():
 
 
 def draw():
-    global Character1, Character2, Character3,image,c1,c2,c3
+    global Character1, Character2, Character3,back_groundImage,c1,c2,c3
 #595 889
     clear_canvas()
-    image.draw(GAME_WIDTH / 2, GAME_HEIGHT / 2)
+    back_groundImage.draw(GAME_WIDTH / 2, GAME_HEIGHT / 2)
     Character1.draw(65 + 75, 357 - 75, 150 + (c1 * 20), 150 + (c1 * 20))
     Character2.draw(65 + 75 + 150 + 10, 357 - 75, 150 + (c2 * 20), 150 + (c2 * 20))
     Character3.draw(65 + 75 + 300 + 20, 357 - 75, 150 + (c3 * 20), 150 + (c3 * 20))

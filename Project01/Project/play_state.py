@@ -34,7 +34,7 @@ Enemy_list=[]  #적 탄알 리스트
 count=1
 name = "PlayState"
 
-screen=None
+back_groundImage=None
 score=None
 player=None
 life=None
@@ -45,8 +45,8 @@ def pause():
     pass
 
 def enter():
-    global screen,score,player,life,P_bullet_list,E_time,B_time,count
-    screen=load_image(fileLink+'Screen\\GAMEPrint.png')
+    global back_groundImage,score,player,life,P_bullet_list,E_time,B_time,count
+    back_groundImage=load_image(fileLink+'Screen\\GAMEPrint.png')
     player=Player(590/2,100,3,start_state.character)
     P_bullet_list = [Player_bullet(player.x,player.y)]
     score=Score()
@@ -58,8 +58,8 @@ def enter():
 
 
 def exit():
-    global screen,score,player,life,P_bullet_list,E_bullet_list
-    del(screen)
+    global back_groundImage,score,player,life,P_bullet_list,E_bullet_list
+    del(back_groundImage)
     del(player)
     del(life)
     del(score)
@@ -145,9 +145,9 @@ def update():
 
 
 def draw():
-    global  screen,P_bullet_list
+    global  back_groundImage,P_bullet_list
     clear_canvas()
-    screen.draw(GAME_WIDTH / 2, GAME_HEIGHT / 2)
+    back_groundImage.draw(GAME_WIDTH / 2, GAME_HEIGHT / 2)
     life.draw(player)
     score.draw(224,30)
     for i in range(len(P_bullet_list)):
