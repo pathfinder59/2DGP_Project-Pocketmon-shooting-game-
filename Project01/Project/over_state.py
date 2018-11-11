@@ -6,14 +6,14 @@ from score import Score
 
 name = "OverState"
 image = None
-
+fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 GAME_HEIGHT = 875
 GAME_WIDTH = 590
 
 
 def enter():
     global image
-    image = load_image('GAMEOVER.png')
+    image = load_image(fileLink+'Screen\\GAMEOVER.png')
     pass
 
 def pause():

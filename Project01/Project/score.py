@@ -7,12 +7,12 @@ import math
 #import pause_state
 import game_framework
 
-
+fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 class Score:
     def __init__(self):
         self.current_score=0
         self.count=pico2d.get_time()
-        Score.image=load_image('Number.png')
+        Score.image=load_image(fileLink+'Score\\Number.png')
     def update(self):
         if pico2d.get_time()-self.count>0.1:
             self.count=pico2d.get_time()

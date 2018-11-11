@@ -13,12 +13,14 @@ Character3 = None
 character = None
 cursurX=GAME_WIDTH/2
 cursurY=50
+fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
+
 def enter():
     global image,Character1,Character2,Character3
-    image = load_image('gamestart.png')
-    Character1 = load_image('CHAR1.png')
-    Character2 = load_image('CHAR2.png')
-    Character3 = load_image('CHAR3.png')
+    image = load_image(fileLink+'Screen\\gamestart.png')
+    Character1 = load_image(fileLink+'SelectImage\\CHAR1.png')
+    Character2 = load_image(fileLink+'SelectImage\\CHAR2.png')
+    Character3 = load_image(fileLink+'SelectImage\\CHAR3.png')
     pass
 
 

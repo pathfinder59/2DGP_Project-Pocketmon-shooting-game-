@@ -9,7 +9,7 @@ from character import Character
 import game_framework
 from p_bullet import E_bullet
 MOVE,IDLE,SHOOT=range(3)
-
+fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 PIXEL_PER_METER = (10.0 / 0.3) # 10 pixel 30 cm
 RUN_SPEED_KMPH = 13 # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
@@ -23,7 +23,7 @@ FRAMES_PER_ENEMY = 3
 class Enemy04(Character):
     def __init__(self, x, y):
         super().__init__(x, y,10)
-        Enemy04.image=load_image('trainner.png')
+        Enemy04.image=load_image(fileLink+'Character\\trainner.png')
         self.type=3
         self.pattern=random.randint(1,2)
         self.frame=random.randint(0,4)

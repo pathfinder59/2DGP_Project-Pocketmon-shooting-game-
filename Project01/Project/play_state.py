@@ -36,13 +36,13 @@ player=None
 life=None
 E_time=None
 
-
+fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 def pause():
     pass
 
 def enter():
     global screen,score,player,life,P_bullet_list,E_time,B_time,count
-    screen=load_image('GAMEPrint.png')
+    screen=load_image(fileLink+'Screen\\GAMEPrint.png')
     player=Player(590/2,100,3,start_state.character)
     P_bullet_list = [P_bullet(player.x,player.y)]
     score=Score()
