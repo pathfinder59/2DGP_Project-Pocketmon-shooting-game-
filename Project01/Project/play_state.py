@@ -38,6 +38,7 @@ back_groundImage=None
 score=None
 player=None
 life=None
+
 E_time=None
 
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
