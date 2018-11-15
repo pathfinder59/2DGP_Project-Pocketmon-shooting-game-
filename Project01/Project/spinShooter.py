@@ -124,9 +124,12 @@ class ShootState:
     @staticmethod
     def update(Enemy,E_bullet_list,player):
    ##타입 0 총알생성
-        E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, -0.0005, 2, 0.0002))
-        Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
-        Enemy.add_event(IdleState)
+        if Enemy.pattern==1:
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, -0.0005, 2, 0.0002))
+            Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
+            Enemy.add_event(IdleState)
+        elif Enemy.pattern==2:
+            
 
     @staticmethod
     def draw(Enemy):
