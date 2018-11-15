@@ -110,6 +110,7 @@ class Player(Character):
 
         self.skilltime=None
         self.skillframe=0
+        self.skillCooltime=pico2d.get_time()-20
         self.speed=RUN_SPEED_PPS
         self.skillSwitch=False
         self.hitSwitch=False
@@ -175,17 +176,20 @@ class Player(Character):
 
         ##적총알 플레이어 타격시 타입이 거북이&스킬중이면 피격x
     def skill(self):
-        self.skillSwitch=True
-        self.skilltime=pico2d.get_time()
-        self.sCount=-1
-        if self.Type== 2 : ##이상해씨
-            self.hp=self.hp+1
-            pass
-        elif self.Type==1: ##파이리
-            self.attack=4
-            pass
-        elif self.Type==0: ##꼬부기
-            pass
+        if pico2d.get_time()-self.skillCooltime>=25:
+            self.skillSwitch=True
+            self.skilltime=pico2d.get_time()
+
+            self.skillCooltime=pico2d.get_time()
+            self.sCount=-1
+            if self.Type== 2 : ##이상해씨
+                self.hp=self.hp+1
+                pass
+            elif self.Type==1: ##파이리
+                self.attack=4
+                pass
+            elif self.Type==0: ##꼬부기
+                pass
 
     ##def draw(self):
     ##    Player.image.clip_draw(self.frame * 50, 60 * self.Type, 50, 60, 590 / 2, 100)
