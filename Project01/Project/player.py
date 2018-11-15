@@ -132,7 +132,7 @@ class Player(Character):
         if self.skillSwitch:
             #self.sCount = self.sCount + 1
             self.skillframe=(self.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
-            if pico2d.get_time()-self.skilltime==5:
+            if pico2d.get_time()-self.skilltime>=5:
                 self.skillSwitch = False
                 self.attack = 1
 
