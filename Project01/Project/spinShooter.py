@@ -126,11 +126,15 @@ class ShootState:
    ##타입 0 총알생성
         if Enemy.pattern==1:
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, -0.0005, 2, 0.0002))
-            Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
-            Enemy.add_event(IdleState)
-        elif Enemy.pattern==2:
-            
 
+        elif Enemy.pattern==2:
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, -0.0005, 2, 0.0002))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.125, -0.0005, 2, 0.0002))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle-0.125, -0.0005, 2, 0.0002))
+            pass
+
+        Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
+        Enemy.add_event(IdleState)
     @staticmethod
     def draw(Enemy):
         Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
