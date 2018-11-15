@@ -129,8 +129,8 @@ class ShootState:
 
         elif Enemy.pattern==2:
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, -0.0005, 2, 0.0002))
-            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.125, -0.0005, 2, 0.0002))
-            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle-0.125, -0.0005, 2, 0.0002))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.05, -0.0005, 2, 0.0002))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle-0.05, -0.0005, 2, 0.0002))
             pass
 
         Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
