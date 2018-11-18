@@ -6,6 +6,8 @@ from score import Score
 
 name = "OverState"
 back_groundImage = None
+bestScoreImage=None
+currentScoreImage=None
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 GAME_HEIGHT = 875
 GAME_WIDTH = 590
@@ -22,9 +24,11 @@ def pause():
     pass
 
 def exit():
-    global back_groundImage
+    global back_groundImage,currentScoreImage,bestScoreImage
     del (back_groundImage)
-    pass
+    del (currentScoreImage)
+    del (bestScoreImage)
+
 
 def handle_events():
     events = get_events()
@@ -41,10 +45,11 @@ def update():
     pass
 
 def draw():
-    global back_groundImage
     clear_canvas()
     back_groundImage.draw(590/2, 875/2)
-    start_state.bestScore.draw(400,130)
-    play_state.score.draw(400,30)
+    bestScoreImage.draw(100, 140)
+    currentScoreImage.draw(100, 40)
+    start_state.bestScore.draw(450,130)
+    play_state.score.draw(450,30)
     update_canvas()
     pass
