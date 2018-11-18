@@ -14,7 +14,7 @@ import start_state
 
 GAME_HEIGHT = 875
 GAME_WIDTH = 590
-
+pauseImge=None
 name = "PauseState"
 
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
@@ -24,10 +24,12 @@ def pause():
 def enter():
     global pauseImage
     pauseImage=load_image(fileLink+'Screen\\pause.png')
-   pass
+    pass
 
 
 def exit():
+    global pauseImage
+    del(pauseImage)
     pass
 
 def pause():
@@ -50,11 +52,12 @@ def handle_events():
 
 
 def update():
-
+    pass
 
 def draw():
-
+    pauseImage.draw(GAME_WIDTH/2,GAME_HEIGHT/2)
     update_canvas()
+
 
 
 

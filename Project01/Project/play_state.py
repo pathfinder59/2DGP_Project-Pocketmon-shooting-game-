@@ -4,10 +4,11 @@ import os
 
 from pico2d import *
 import math
-#import pause_state
+
 import game_framework
 import start_state
 import over_state
+import pause_state
 
 from player import Player
 from gameBullet import Player_bullet
@@ -90,6 +91,8 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.push_state(over_state)
+        elif event.type==SDL_KEYDOWN and event.key==SDLK_p:
+            game_framework.push_state(pause_state)
         elif event.type==SDL_KEYDOWN and event.key==SDLK_SPACE:
             if player.skillSwitch==False:
                 player.skill()
