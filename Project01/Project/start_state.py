@@ -1,12 +1,13 @@
 import game_framework
 from pico2d import *
 import play_state
+from score import Score
 #import drill06
 GAME_HEIGHT= 875
 GAME_WIDTH= 590
 
 name = "StartState"
-
+bestScore=Score()
 Character1 = None
 Character2 = None
 Character3 = None

@@ -107,6 +107,8 @@ def update():
     if player.update(P_bullet_list,E_bullet_list):
         pass
     else :
+        if start_state.bestScore.current_score<score.current_score:
+            start_state.bestScore.current_score=score.current_score
         game_framework.push_state(over_state)
         pass   #게임오버 구현 미완성
     i=0

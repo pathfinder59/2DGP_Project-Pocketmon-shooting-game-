@@ -42,6 +42,7 @@ def draw():
     global back_groundImage
     clear_canvas()
     back_groundImage.draw(590/2, 875/2)
+    start_state.bestScore.draw(400,130)
     play_state.score.draw(400,30)
     update_canvas()
     pass
