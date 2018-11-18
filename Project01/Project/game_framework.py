@@ -84,6 +84,13 @@ def reset(state):
     stack.append(state)
     state.enter()
 
+def returnState(state):
+    global stack
+    while state!=stack[-1]:
+        stack[-1].exit()
+        stack.pop()
+
+
 def quit():
     global running
     running = False

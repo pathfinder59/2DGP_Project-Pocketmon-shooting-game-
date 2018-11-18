@@ -30,9 +30,9 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
-            game_framework.reset(start_state)
+            game_framework.returnState(start_state)
         elif event.type == SDL_KEYDOWN:
-            game_framework.reset(start_state)
+            game_framework.returnState(start_state)
 
 
 def update():
