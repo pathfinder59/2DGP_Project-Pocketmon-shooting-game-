@@ -1,13 +1,15 @@
 import game_framework
+
+
 from pico2d import *
 import play_state
 from score import Score
-#import drill06
+
 GAME_HEIGHT= 875
 GAME_WIDTH= 590
 
 name = "StartState"
-bestScore=Score()
+
 Character1 = None
 Character2 = None
 Character3 = None
@@ -18,10 +20,12 @@ fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 
 def enter():
     global back_groundImage,Character1,Character2,Character3
+    global bestScore
     back_groundImage = load_image(fileLink+'Screen\\gamestart.png')
     Character1 = load_image(fileLink+'SelectImage\\CHAR1.png')
     Character2 = load_image(fileLink+'SelectImage\\CHAR2.png')
     Character3 = load_image(fileLink+'SelectImage\\CHAR3.png')
+    bestScore = Score()
     pass
 
 
