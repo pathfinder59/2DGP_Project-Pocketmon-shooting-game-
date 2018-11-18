@@ -12,8 +12,10 @@ GAME_WIDTH = 590
 
 
 def enter():
-    global back_groundImage
+    global back_groundImage,currentScoreImage,bestScoreImage
     back_groundImage = load_image(fileLink+'Screen\\GAMEOVER.png')
+    bestScoreImage = load_image(fileLink + 'Screen\\bestscore.png')
+    currentScoreImage = load_image(fileLink + 'Screen\\currentscore.png')
     pass
 
 def pause():
