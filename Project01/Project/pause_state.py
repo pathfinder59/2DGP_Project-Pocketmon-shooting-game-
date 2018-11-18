@@ -14,7 +14,7 @@ import start_state
 
 GAME_HEIGHT = 875
 GAME_WIDTH = 590
-pauseImge=None
+pauseImage=None
 name = "PauseState"
 
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
@@ -22,8 +22,9 @@ def pause():
     pass
 
 def enter():
-    global pauseImage
+    global pauseImage,pauseTime
     pauseImage=load_image(fileLink+'Screen\\pause.png')
+    pauseTime = pico2d.get_time()
     pass
 
 
