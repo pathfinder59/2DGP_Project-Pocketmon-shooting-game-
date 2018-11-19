@@ -110,7 +110,7 @@ class Player(Character):
 
         self.skilltime=None
         self.skillframe=0
-        self.skillCooltime=pico2d.get_time()-20
+        self.skillCooltime=pico2d.get_time()-25
         self.speed=RUN_SPEED_PPS
         self.skillSwitch=False
         self.hitSwitch=False
@@ -129,9 +129,9 @@ class Player(Character):
 
     def update(self,P_bullet_list,E_bullet_list):
         self.frame = (self.frame + FRAMES_PER_PLAYER*ACTION_PER_TIME*game_framework.frame_time) % 9
-        #self.count = (self.count + 1) % 5
+
         if self.skillSwitch:
-            #self.sCount = self.sCount + 1
+
             self.skillframe=(self.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
             if pico2d.get_time()-self.skilltime>=5:
                 self.skillSwitch = False
