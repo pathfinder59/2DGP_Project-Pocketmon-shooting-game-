@@ -33,7 +33,7 @@ class LineShooter(Character):
         self.lifetime=pico2d.get_time()
         self.moveBit=-1
         self.shoot_time=0
-        self.shoot_angle=0
+        self.shoot_angle=0.25
         self.angle_rate=0
         self.event_que = []
         self.cur_state = MoveState
@@ -124,12 +124,12 @@ class ShootState:
     def update(Enemy,E_bullet_list,player):
    ##타입 0 총알생성
         if Enemy.pattern==1:
-            E_bullet_list.append(Enemy_bullet(Enemy.x,Enemy.y,0.25,0,2,0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x,Enemy.y,Enemy.shoot_angle,0,2,0))
             pass
         elif Enemy.pattern==2:
-            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, 0.25, 0, 2, 0))
-            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, 0.125, 0, 2, 0))
-            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, 0.375, 0, 2, 0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 2, 0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle-0.125, 0, 2, 0))
+            E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.125, 0, 2, 0))
             pass
         Enemy.add_event(IdleState)
 

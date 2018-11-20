@@ -31,7 +31,7 @@ class SpinShooter(Character):
         self.lifetime = pico2d.get_time()
         self.moveBit = -1
         self.shoot_time=0
-        self.shoot_angle=0
+        self.shoot_angle=0.25
         self.angle_rate=0.05
         self.event_que = []
         self.cur_state = MoveState
