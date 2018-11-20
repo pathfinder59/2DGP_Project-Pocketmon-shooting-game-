@@ -62,8 +62,23 @@ class IdleState:
             pass
 # fill here
 class RunState:
-    def enter(player):
-        #player.frame=0
+    def enter(player,event):
+        if event == RIGHT_DOWN:
+            player.velocityX += RUN_SPEED_PPS
+        elif event == RIGHT_UP:
+            player.velocityX -= RUN_SPEED_PPS
+        if event == LEFT_DOWN:
+            player.velocityX -= RUN_SPEED_PPS
+        elif event == LEFT_UP:
+            player.velocityX += RUN_SPEED_PPS
+        if event == TOP_DOWN:
+            player.velocityY += RUN_SPEED_PPS
+        elif event == TOP_UP:
+            player.velocityY -= RUN_SPEED_PPS
+        if event == UNDER_DOWN:
+            player.velocityY -= RUN_SPEED_PPS
+        elif event == UNDER_UP:
+            player.velocityY += RUN_SPEED_PPS
         player.dir=player.velocityX
 
     def exit(player):
@@ -166,7 +181,9 @@ class Player(Character):
 
         if len(self.event_que)>0:
             event=self.event_que.pop()
+            self.cur_state.exit(self, event)
             self.change_state(next_state_table[self.cur_state][event])
+            self.cur_state.enter(self, event)
         return True
 
 
@@ -191,27 +208,20 @@ class Player(Character):
             elif self.Type==0: ##꼬부기
                 pass
 
-    ##def draw(self):
-    ##    Player.image.clip_draw(self.frame * 50, 60 * self.Type, 50, 60, 590 / 2, 100)
-    ##    if self.skillSwitch :
-    ##        Player.skill_image.clip_draw(self.sCount%10*50,50*self.Type,50,50,self.x,self.y)
-    ##        pass
-##
+    #def change_state(self,  state):
+     #   self.cur_state.exit(self,key_event)
+        #if state==IdleState:
+            #if len(move_list) > 0:
+             #   del move_list[0]
+            #if len(move_list)>0:
+            #    pass
+            #else:
+#                self.cur_state=state
 
-    def change_state(self,  state):
-        self.cur_state.exit(self)
-        if state==IdleState:
-            if len(move_list) > 0:
-                del move_list[0]
-            if len(move_list)>0:
-                pass
-            else:
-                self.cur_state=state
-
-        if state == RunState:
-            move_list.append(state)
-            self.cur_state = state
-        self.cur_state.enter(self)
+ #       if state == RunState:
+  #          move_list.append(state)
+      #  self.cur_state = state
+       # self.cur_state.enter(self,event)
         pass
 
 
@@ -222,22 +232,8 @@ class Player(Character):
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
-            if key_event == RIGHT_DOWN:
-                self.velocityX += self.speed
-            elif key_event == LEFT_DOWN:
-                self.velocityX -= self.speed
-            elif key_event == TOP_DOWN:
-                self.velocityY += self.speed
-            elif key_event == UNDER_DOWN:
-                self.velocityY -= self.speed
-            elif key_event == RIGHT_UP:
-                self.velocityX -= self.speed
-            elif key_event == LEFT_UP:
-                self.velocityX += self.speed
-            elif key_event == TOP_UP:
-                self.velocityY -= self.speed
-            elif key_event == UNDER_UP:
-                self.velocityY += self.speed
+
+
             elif key_event== SHIFT_DOWN:
                 if self.cur_state == RunState:
                     if self.velocityX > 0:
