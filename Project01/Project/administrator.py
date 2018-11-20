@@ -24,7 +24,7 @@ class Administrator:
 
     def count_nEnemy(self):
         enemyList = play_state.get_EnemyList()
-        if len(enemyList)<=4:
+        if len(enemyList)<=(4*play_state.count):
             return BehaviorTree.SUCCESS
         else:
             return BehaviorTree.FAIL
@@ -40,11 +40,12 @@ class Administrator:
                 nLeftBullet+=1
             else:
                 nRightBullet+=1
-        if nLeftBullet<nRightBullet:
-            enemyList.append(play_state.Enemy_table[random.randint(0, 3)](random.randint(20,get_canvas_width()//2 ),
+        for i in range(play_state.count):
+            if nLeftBullet<nRightBullet:
+                enemyList.append(play_state.Enemy_table[random.randint(0, 3)](random.randint(20,get_canvas_width()//2 ),
                                                                           get_canvas_height() + 15))
-        else:
-            enemyList.append(play_state.Enemy_table[random.randint(0, 3)](random.randint(get_canvas_width() // 2,get_canvas_width()-20),
+            else:
+                enemyList.append(play_state.Enemy_table[random.randint(0, 3)](random.randint(get_canvas_width() // 2,get_canvas_width()-20),
                                                                           get_canvas_height() + 15))
         return BehaviorTree.SUCCESS
 
