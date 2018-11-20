@@ -100,7 +100,7 @@ class RunState:
                 player.velocityY += SLOW_SPEED_PPS
             elif player.velocityY < 0:
                 player.velocityY -= SLOW_SPEED_PPS
-                player.speed = RUN_SPEED_PPS
+            player.speed = RUN_SPEED_PPS
             pass
 
         player.dir=player.velocityX
