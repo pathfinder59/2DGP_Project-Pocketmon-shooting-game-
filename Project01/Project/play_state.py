@@ -78,6 +78,8 @@ def get_Player():
     return player
 def get_pBulletList():
     return P_bullet_list
+def get_eBulletList():
+    return E_bullet_list
 def get_EnemyList():
     return Enemy_list
 def pause():

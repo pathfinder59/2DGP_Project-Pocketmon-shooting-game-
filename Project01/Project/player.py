@@ -9,6 +9,7 @@ import math
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 from gameBullet import Player_bullet
 from character import Character
+import play_state
 move_list=[]
 SKILL_COOLTIME={0:30,1:30,2:25}
 
@@ -107,11 +108,29 @@ class RunState:
 
     def exit(player,event):
         pass
+
     def update(player):
-        player.x+=player.velocityX*game_framework.frame_time
-        player.x=clamp(25,player.x,590-25)
-        player.y += player.velocityY*game_framework.frame_time
+        E_bullet_list=play_state.get_eBulletList()
+        P_bullet_list=play_state.get_pBulletList()
+
+        player.x += player.velocityX * game_framework.frame_time
+        player.x = clamp(25, player.x, 590 - 25)
+        player.y += player.velocityY * game_framework.frame_time
         player.y = clamp(25, player.y, 875 - 25)
+
+        if player.skillSwitch:
+
+            player.skillframe=(player.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
+            if pico2d.get_time()-player.skilltime>=5:
+                player.skillSwitch = False
+                player.attack = 1
+
+        player.check_collision()
+
+        if pico2d.get_time()-player.count>=0.15 :  #일종의 타이머로 총알 생성
+            P_bullet_list.append(Player_bullet(player.x, player.y))
+            player.count=get_time()
+
 
     def draw(player):
         if player.hitSwitch:
@@ -162,17 +181,8 @@ class Player(Character):
         self.cur_state.enter(self,None)
 
         self.sCount=0
-
-    def update(self,P_bullet_list,E_bullet_list):
-        self.frame = (self.frame + FRAMES_PER_PLAYER*ACTION_PER_TIME*game_framework.frame_time) % 9
-
-        if self.skillSwitch:
-
-            self.skillframe=(self.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
-            if pico2d.get_time()-self.skilltime>=5:
-                self.skillSwitch = False
-                self.attack = 1
-
+    def check_collision(self):
+        E_bullet_list = play_state.get_eBulletList()
         for i in E_bullet_list:
             if math.sqrt((i.x - self.x) ** 2 + (i.y - self.y) ** 2) < 9:
                 if self.Type==0:
@@ -192,12 +202,11 @@ class Player(Character):
                         self.hitSwitch = True
                         E_bullet_list.remove(i)
                         del i
-                if self.hp==0:   #게임오버 실행
-                    return False
-                    pass
-        if pico2d.get_time()-self.count>=0.15 :  #일종의 타이머로 총알 생성
-            P_bullet_list.append(Player_bullet(self.x, self.y))
-            self.count=get_time()
+
+    def update(self,P_bullet_list,E_bullet_list):
+        if self.hp == 0:  # 게임오버 실행
+            return False
+        self.frame = (self.frame + FRAMES_PER_PLAYER*ACTION_PER_TIME*game_framework.frame_time) % 9
         self.cur_state.update(self)
 
         if len(self.event_que)>0:
