@@ -41,10 +41,10 @@ ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_PLAYER = 9
 FRAMES_PER_SKILL = 10
 class IdleState:
-    def enter(player):
+    def enter(player,event):
         player.timer=1000
 
-    def exit(player):
+    def exit(player,event):
         pass
     def update(player):
         #player.frame=(player.frame+1)%8
@@ -64,24 +64,48 @@ class IdleState:
 class RunState:
     def enter(player,event):
         if event == RIGHT_DOWN:
-            player.velocityX += RUN_SPEED_PPS
+            player.velocityX += player.speed
         elif event == RIGHT_UP:
-            player.velocityX -= RUN_SPEED_PPS
+            player.velocityX -= player.speed
         if event == LEFT_DOWN:
-            player.velocityX -= RUN_SPEED_PPS
+            player.velocityX -= player.speed
         elif event == LEFT_UP:
-            player.velocityX += RUN_SPEED_PPS
+            player.velocityX += player.speed
         if event == TOP_DOWN:
-            player.velocityY += RUN_SPEED_PPS
+            player.velocityY += player.speed
         elif event == TOP_UP:
-            player.velocityY -= RUN_SPEED_PPS
+            player.velocityY -= player.speed
         if event == UNDER_DOWN:
-            player.velocityY -= RUN_SPEED_PPS
+            player.velocityY -= player.speed
         elif event == UNDER_UP:
-            player.velocityY += RUN_SPEED_PPS
+            player.velocityY += player.speed
+
+        if event == SHIFT_DOWN:
+            if player.velocityX > 0:
+                player.velocityX -= SLOW_SPEED_PPS
+            elif player.velocityX < 0:
+                player.velocityX += SLOW_SPEED_PPS
+            if player.velocityY > 0:
+                player.velocityY -= SLOW_SPEED_PPS
+            elif player.velocityY < 0:
+                player.velocityY += SLOW_SPEED_PPS
+            player.speed = RUN_SPEED_PPS-SLOW_SPEED_PPS
+            pass
+        elif event == SHIFT_UP:
+            if player.velocityX > 0:
+                player.velocityX += SLOW_SPEED_PPS
+            elif player.velocityX < 0:
+                player.velocityX -= SLOW_SPEED_PPS
+            if player.velocityY > 0:
+                player.velocityY += SLOW_SPEED_PPS
+            elif player.velocityY < 0:
+                player.velocityY -= SLOW_SPEED_PPS
+                player.speed = RUN_SPEED_PPS
+            pass
+
         player.dir=player.velocityX
 
-    def exit(player):
+    def exit(player,event):
         pass
     def update(player):
         player.x+=player.velocityX*game_framework.frame_time
@@ -103,11 +127,8 @@ class RunState:
 
 
 next_state_table = {
-    IdleState:{RIGHT_UP:RunState,LEFT_UP:RunState,RIGHT_DOWN:RunState,LEFT_DOWN:RunState,
-               TOP_UP: RunState, UNDER_UP: RunState, TOP_DOWN: RunState, UNDER_DOWN: RunState,
-               SHIFT_DOWN: IdleState, SHIFT_UP: IdleState},
-    RunState:{RIGHT_UP:IdleState,LEFT_UP:IdleState,LEFT_DOWN:RunState,RIGHT_DOWN:RunState,
-              TOP_UP: IdleState, UNDER_UP: IdleState, TOP_DOWN: RunState, UNDER_DOWN: RunState,
+    RunState:{RIGHT_UP:RunState,LEFT_UP:RunState,LEFT_DOWN:RunState,RIGHT_DOWN:RunState,
+              TOP_UP: RunState, UNDER_UP: RunState, TOP_DOWN: RunState, UNDER_DOWN: RunState,
               SHIFT_DOWN: RunState, SHIFT_UP: RunState}
 # fill here
 }
@@ -137,8 +158,8 @@ class Player(Character):
         self.velocityY = 0
         # fill here
         self.event_que = []
-        self.cur_state = IdleState
-        self.cur_state.enter(self)
+        self.cur_state = RunState
+        self.cur_state.enter(self,None)
 
         self.sCount=0
 
@@ -182,7 +203,7 @@ class Player(Character):
         if len(self.event_que)>0:
             event=self.event_que.pop()
             self.cur_state.exit(self, event)
-            self.change_state(next_state_table[self.cur_state][event])
+            self.cur_state=next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
         return True
 
@@ -232,31 +253,5 @@ class Player(Character):
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
-
-
-            elif key_event== SHIFT_DOWN:
-                if self.cur_state == RunState:
-                    if self.velocityX > 0:
-                        self.velocityX -= SLOW_SPEED_PPS
-                    elif self.velocityX < 0:
-                        self.velocityX += SLOW_SPEED_PPS
-                    if self.velocityY > 0:
-                        self.velocityY -= SLOW_SPEED_PPS
-                    elif self.velocityY < 0:
-                        self.velocityY += SLOW_SPEED_PPS
-                    self.speed=RUN_SPEED_PPS-SLOW_SPEED_PPS
-                pass
-            elif key_event==SHIFT_UP:
-                if self.cur_state==RunState:
-                    if self.velocityX>0:
-                        self.velocityX+=SLOW_SPEED_PPS
-                    elif self.velocityX<0:
-                        self.velocityX -= SLOW_SPEED_PPS
-                    if self.velocityY>0:
-                        self.velocityY+=SLOW_SPEED_PPS
-                    elif self.velocityY<0:
-                        self.velocityY -= SLOW_SPEED_PPS
-                    self.speed=RUN_SPEED_PPS
-                pass
             self.add_event(key_event)
         pass
