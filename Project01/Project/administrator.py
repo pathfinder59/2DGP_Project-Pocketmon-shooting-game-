@@ -3,47 +3,62 @@ import math
 import game_framework
 from BehaviorTree import BehaviorTree, SelectorNode, SequenceNode, LeafNode
 from pico2d import *
+
 import play_state
 
-# zombie Run Speed
-
-animation_names = ['Attack', 'Dead', 'Idle', 'Walk']
 
 
 class Administrator:
     images = None
 
     def __init__(self):
+        self.build_behavior_tree()
 
-
-    def wander(self):
-        self.speed = RUN_SPEED_PPS
-        self.timer -= game_framework.frame_time
-        if self.timer < 0:
-            self.timer += 1.0
-        self.dir = random.random() * 2 * math.pi
+    def adjust_EnemyShootAngle(self):
+        enemyList = play_state.get_EnemyList()
+        player = play_state.get_Player()
+        for i in enemyList:
+            if i.type==0 or i.type==2:
+                i.shoot_angle=-math.atan2(player.y - i.y, player.x - i.x) / 3.1415 / 2
         return BehaviorTree.SUCCESS
 
-    def find_player(self):
-        boy = main_state.get_boy()
-        distance = (boy.x - self.x) ** 2 + (boy.y - self.y) ** 2
-        if distance < (PIXEL_PER_METER * 10) ** 2:
-            self.dir = math.atan2(boy.y - self.y, boy.x - self.x)
+    def count_nEnemy(self):
+        enemyList = play_state.get_EnemyList()
+        if len(enemyList)<=4:
             return BehaviorTree.SUCCESS
         else:
-            self.speed = 0
             return BehaviorTree.FAIL
 
-    def move_to_player(self):
-        self.speed = RUN_SPEED_PPS
+
+    def generate_Enemy(self):
+        pBulletList = play_state.get_pBulletList()
+        enemyList = play_state.get_EnemyList()
+        nLeftBullet=0
+        nRightBullet=0
+        for i in pBulletList:
+            if i.x<=get_canvas_width()//2:
+                nLeftBullet+=1
+            else:
+                nRightBullet+=1
+        if nLeftBullet<nRightBullet:
+            enemyList.append(play_state.Enemy_table[random.randint(0, 3)](random.randint(20,get_canvas_width()//2 ),
+                                                                          get_canvas_height() + 15))
+        else:
+            enemyList.append(play_state.Enemy_table[random.randint(0, 3)](random.randint(get_canvas_width() // 2,get_canvas_width()-20),
+                                                                          get_canvas_height() + 15))
         return BehaviorTree.SUCCESS
 
     def build_behavior_tree(self):
-        find_player_node = LeafNode("Find Player", self.find_player)
-        move_to_player_node = LeafNode("Move to Player", self.move_to_player)
-        chase_node = SequenceNode("Chase")
-        chase_node.add_children(find_player_node, move_to_player_node)
-        self.bt = BehaviorTree(chase_node)
+        generateEnemy_node= LeafNode("Generate",self.generate_Enemy)
+        countEnemy_node=LeafNode("Count",self.count_nEnemy)
+        adjustEnemy_node=LeafNode("Adjust",self.adjust_EnemyShootAngle)
+        makeEnemy_node=SequenceNode("Make")
+        makeEnemy_node.add_children(countEnemy_node,generateEnemy_node)
+        make_adjust_node=SelectorNode("MakeAdjust")
+        make_adjust_node.add_children(makeEnemy_node,adjustEnemy_node)
+        self.bt=BehaviorTree(make_adjust_node)
+        pass
+
 
 
     def update(self):

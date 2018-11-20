@@ -12,6 +12,7 @@ import pause_state
 
 from player import Player
 from gameBullet import Player_bullet
+from administrator import Administrator
 
 from score import Score
 from life import Life
@@ -47,12 +48,13 @@ def pause():
     pass
 
 def enter():
-    global back_groundImage,score,player,life,P_bullet_list,E_time,B_time,count
+    global back_groundImage,score,player,life,P_bullet_list,E_time,B_time,count,admin
     back_groundImage=load_image(fileLink+'Screen\\GAMEPrint.png')
     player=Player(590/2,100,3,start_state.character)
     P_bullet_list = [Player_bullet(player.x,player.y)]
     score=Score()
     count = 1
+    admin=Administrator()
     life=Life()
     E_time=pico2d.get_time()
     B_time = pico2d.get_time()
@@ -72,8 +74,12 @@ def exit():
     for i in range(len(Enemy_list)):
         del(Enemy_list[0])
 
-
-
+def get_Player():
+    return player
+def get_pBulletList():
+    return P_bullet_list
+def get_EnemyList():
+    return Enemy_list
 def pause():
     pass
 
@@ -145,8 +151,9 @@ def update():
 
     elif int(pico2d.get_time()-E_time)>=3:
         E_time=pico2d.get_time()
-        for i in range(count):
-            Enemy_list.append(Enemy_table[random.randint(0,3)](random.randint(20,550),GAME_HEIGHT+15))
+        admin.update()
+        #for i in range(count):
+            #Enemy_list.append(Enemy_table[random.randint(0,3)](random.randint(20,550),GAME_HEIGHT+15))
 
 
 
