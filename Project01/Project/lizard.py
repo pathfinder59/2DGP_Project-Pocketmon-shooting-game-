@@ -195,17 +195,9 @@ class Lizard(Character):
         if pico2d.get_time()-self.skillCooltime>=25:
             self.skillSwitch=True
             self.skilltime=pico2d.get_time()
-
             self.skillCooltime=pico2d.get_time()
-            self.sCount=-1
-            if self.Type== 2 : ##이상해씨
-                self.hp=self.hp+1
-                pass
-            elif self.Type==1: ##파이리
-                self.attack=4
-                pass
-            elif self.Type==0: ##꼬부기
-                pass
+            self.attack=4
+
 
     #def change_state(self,  state):
      #   self.cur_state.exit(self,key_event)

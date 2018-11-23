@@ -101,7 +101,6 @@ class RunState:
             Grass.skillframe=(Grass.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
             if pico2d.get_time()-Grass.skilltime>=5:
                 Grass.skillSwitch = False
-                Grass.attack = 1
 
         Grass.check_collision()
 

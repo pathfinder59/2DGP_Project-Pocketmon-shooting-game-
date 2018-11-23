@@ -100,7 +100,6 @@ class RunState:
             Turtle.skillframe=(Turtle.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
             if pico2d.get_time()-Turtle.skilltime>=5:
                 Turtle.skillSwitch = False
-                Turtle.attack = 1
         Turtle.check_collision()
 
         if pico2d.get_time()-Turtle.count>=0.15 :  #일종의 타이머로 총알 생성
