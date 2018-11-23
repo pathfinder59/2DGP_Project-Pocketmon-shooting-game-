@@ -41,27 +41,6 @@ TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_PLAYER = 9
 FRAMES_PER_SKILL = 10
-class IdleState:
-    def enter(player,event):
-        player.timer=1000
-
-    def exit(player,event):
-        pass
-    def update(player):
-        #player.frame=(player.frame+1)%8
-        pass
-
-    def draw(player):
-        if player.hitSwitch:
-            player.image.opacify(random.random())
-            if pico2d.get_time()-player.hitcount>=3:
-                player.image.opacify(1)
-                player.hitSwitch=False
-        player.image.clip_draw(int(player.frame) * 40, 40 * player.Type, 40, 40, player.x, player.y)
-        if player.skillSwitch:
-            Player.skill_image.clip_draw(int(player.skillframe)*50,50*player.Type,50,50,player.x,player.y)
-            pass
-# fill here
 class RunState:
     def enter(player,event):
         if event == RIGHT_DOWN:
@@ -185,23 +164,16 @@ class Player(Character):
         E_bullet_list = play_state.get_eBulletList()
         for i in E_bullet_list:
             if math.sqrt((i.x - self.x) ** 2 + (i.y - self.y) ** 2) < 9:
-                if self.Type==0:
-                    if self.skillSwitch:
-                        pass
-                    else:
-                        if self.hitSwitch==False:
-                            self.hp=self.hp-1
-                            self.hitcount=pico2d.get_time()
-                            self.hitSwitch=True
-                            E_bullet_list.remove(i)
-                            del i
+                if self.skillSwitch:
+                     pass
                 else:
-                    if self.hitSwitch == False:
-                        self.hp = self.hp - 1
-                        self.hitcount = pico2d.get_time()
-                        self.hitSwitch = True
+                    if self.hitSwitch==False:
+                        self.hp=self.hp-1
+                        self.hitcount=pico2d.get_time()
+                        self.hitSwitch=True
                         E_bullet_list.remove(i)
                         del i
+
 
     def update(self,P_bullet_list,E_bullet_list):
         if self.hp == 0:  # 게임오버 실행
@@ -228,30 +200,6 @@ class Player(Character):
             self.skilltime=pico2d.get_time()
 
             self.skillCooltime=pico2d.get_time()
-            self.sCount=-1
-            if self.Type== 2 : ##이상해씨
-                self.hp=self.hp+1
-                pass
-            elif self.Type==1: ##파이리
-                self.attack=4
-                pass
-            elif self.Type==0: ##꼬부기
-                pass
-
-    #def change_state(self,  state):
-     #   self.cur_state.exit(self,key_event)
-        #if state==IdleState:
-            #if len(move_list) > 0:
-             #   del move_list[0]
-            #if len(move_list)>0:
-            #    pass
-            #else:
-#                self.cur_state=state
-
- #       if state == RunState:
-  #          move_list.append(state)
-      #  self.cur_state = state
-       # self.cur_state.enter(self,event)
         pass
 
 
