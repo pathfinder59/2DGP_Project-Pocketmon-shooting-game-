@@ -15,5 +15,5 @@ class Character:
         self.x = x
         self.y = y
         self.hp=Hp
-
+        Character.image=load_image(fileLink+'Character\\trainner.png')
 

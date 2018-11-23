@@ -42,85 +42,82 @@ ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_PLAYER = 9
 FRAMES_PER_SKILL = 10
 class RunState:
-    def enter(player,event):
+    def enter(Turtle,event):
         if event == RIGHT_DOWN:
-            player.velocityX += player.speed
+            Turtle.velocityX += Turtle.speed
         elif event == RIGHT_UP:
-            player.velocityX -= player.speed
+            Turtle.velocityX -= Turtle.speed
         if event == LEFT_DOWN:
-            player.velocityX -= player.speed
+            Turtle.velocityX -= Turtle.speed
         elif event == LEFT_UP:
-            player.velocityX += player.speed
+            Turtle.velocityX += Turtle.speed
         if event == TOP_DOWN:
-            player.velocityY += player.speed
+            Turtle.velocityY += Turtle.speed
         elif event == TOP_UP:
-            player.velocityY -= player.speed
+            Turtle.velocityY -= Turtle.speed
         if event == UNDER_DOWN:
-            player.velocityY -= player.speed
+            Turtle.velocityY -= Turtle.speed
         elif event == UNDER_UP:
-            player.velocityY += player.speed
+            Turtle.velocityY += Turtle.speed
 
         if event == SHIFT_DOWN:
-            if player.velocityX > 0:
-                player.velocityX -= SLOW_SPEED_PPS
-            elif player.velocityX < 0:
-                player.velocityX += SLOW_SPEED_PPS
-            if player.velocityY > 0:
-                player.velocityY -= SLOW_SPEED_PPS
-            elif player.velocityY < 0:
-                player.velocityY += SLOW_SPEED_PPS
-            player.speed = RUN_SPEED_PPS-SLOW_SPEED_PPS
+            if Turtle.velocityX > 0:
+                Turtle.velocityX -= SLOW_SPEED_PPS
+            elif Turtle.velocityX < 0:
+                Turtle.velocityX += SLOW_SPEED_PPS
+            if Turtle.velocityY > 0:
+                Turtle.velocityY -= SLOW_SPEED_PPS
+            elif Turtle.velocityY < 0:
+                Turtle.velocityY += SLOW_SPEED_PPS
+            Turtle.speed = RUN_SPEED_PPS-SLOW_SPEED_PPS
             pass
         elif event == SHIFT_UP:
-            if player.velocityX > 0:
-                player.velocityX += SLOW_SPEED_PPS
-            elif player.velocityX < 0:
-                player.velocityX -= SLOW_SPEED_PPS
-            if player.velocityY > 0:
-                player.velocityY += SLOW_SPEED_PPS
-            elif player.velocityY < 0:
-                player.velocityY -= SLOW_SPEED_PPS
-            player.speed = RUN_SPEED_PPS
+            if Turtle.velocityX > 0:
+                Turtle.velocityX += SLOW_SPEED_PPS
+            elif Turtle.velocityX < 0:
+                Turtle.velocityX -= SLOW_SPEED_PPS
+            if Turtle.velocityY > 0:
+                Turtle.velocityY += SLOW_SPEED_PPS
+            elif Turtle.velocityY < 0:
+                Turtle.velocityY -= SLOW_SPEED_PPS
+            Turtle.speed = RUN_SPEED_PPS
             pass
 
-        player.dir=player.velocityX
+        Turtle.dir=Turtle.velocityX
 
-    def exit(player,event):
+    def exit(Turtle,event):
         pass
 
-    def update(player):
-        E_bullet_list=play_state.get_eBulletList()
+    def update(Turtle):
         P_bullet_list=play_state.get_pBulletList()
 
-        player.x += player.velocityX * game_framework.frame_time
-        player.x = clamp(25, player.x, 590 - 25)
-        player.y += player.velocityY * game_framework.frame_time
-        player.y = clamp(25, player.y, 875 - 25)
+        Turtle.x += Turtle.velocityX * game_framework.frame_time
+        Turtle.x = clamp(25, Turtle.x, 590 - 25)
+        Turtle.y += Turtle.velocityY * game_framework.frame_time
+        Turtle.y = clamp(25, Turtle.y, 875 - 25)
 
-        if player.skillSwitch:
+        if Turtle.skillSwitch:
+            Turtle.skillframe=(Turtle.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
+            if pico2d.get_time()-Turtle.skilltime>=5:
+                Turtle.skillSwitch = False
+                Turtle.attack = 1
+        Turtle.check_collision()
 
-            player.skillframe=(player.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
-            if pico2d.get_time()-player.skilltime>=5:
-                player.skillSwitch = False
-                player.attack = 1
-
-        player.check_collision()
-
-        if pico2d.get_time()-player.count>=0.15 :  #일종의 타이머로 총알 생성
-            P_bullet_list.append(Player_bullet(player.x, player.y))
-            player.count=get_time()
+        if pico2d.get_time()-Turtle.count>=0.15 :  #일종의 타이머로 총알 생성
+            P_bullet_list.append(Player_bullet(Turtle.x, Turtle.y))
+            Turtle.count=get_time()
 
 
-    def draw(player):
-        if player.hitSwitch:
-            player.image.opacify(random.random())
-            if pico2d.get_time()-player.hitcount>=3:
-                player.image.opacify(1)
-                player.hitSwitch=False
+    def draw(Turtle):
+        if Turtle.hitSwitch:
+            Turtle.image.opacify(random.random())
+            if pico2d.get_time()-Turtle.hitcount>=3:
+                Turtle.image.opacify(1)
+                Turtle.hitSwitch=False
 
-        player.image.clip_draw(int(player.frame) * 40, 40 * player.Type, 40, 40, player.x, player.y)
-        if player.skillSwitch:
-            Player.skill_image.clip_draw(int(player.skillframe)*50,50*player.Type,50,50,player.x,player.y)
+        Turtle.image.clip_draw(int(Turtle.frame) * 40, 40 * Turtle.Type, 40, 40, Turtle.x, Turtle.y)
+        if Turtle.skillSwitch:
+            Turtle.skill_image.clip_draw(int(Turtle.skillframe)*50,50*Turtle.Type,50,50,Turtle.x,Turtle.y)
             pass
 
 
@@ -134,7 +131,7 @@ next_state_table = {
 
 
 
-class Player(Character):
+class Turtle(Character):
     def __init__(self,x,y,Hp,type):
         super().__init__(x,y,Hp)
         self.Type=type
@@ -144,13 +141,13 @@ class Player(Character):
 
         self.skilltime=None
         self.skillframe=0
-        self.skillCooltime=pico2d.get_time()-25
+        self.skillCooltime=pico2d.get_time()-30
         self.speed=RUN_SPEED_PPS
         self.skillSwitch=False
         self.hitSwitch=False
         self.hitcount=0
-        Player.image = load_image(fileLink+'Character\\player1.png')
-        Player.skill_image=load_image(fileLink+'Skill\\skill.png')
+        Turtle.image = load_image(fileLink+'Character\\player1.png')
+        Turtle.skill_image=load_image(fileLink+'Skill\\skill.png')
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0
@@ -195,10 +192,9 @@ class Player(Character):
 
         ##적총알 플레이어 타격시 타입이 거북이&스킬중이면 피격x
     def skill(self):
-        if pico2d.get_time()-self.skillCooltime>=25:
+        if pico2d.get_time()-self.skillCooltime>=30:
             self.skillSwitch=True
             self.skilltime=pico2d.get_time()
-
             self.skillCooltime=pico2d.get_time()
         pass
 

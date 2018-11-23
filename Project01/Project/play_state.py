@@ -10,6 +10,7 @@ import start_state
 import over_state
 import pause_state
 
+from turtle import Turtle
 from player import Player
 from gameBullet import Player_bullet
 from administrator import Administrator
@@ -63,7 +64,7 @@ class BackGround:
 def enter():
     global backGround,score,player,life,P_bullet_list,E_time,B_time,count,admin
     backGround=BackGround()
-    player=Player(590/2,100,3,start_state.character)
+    player=Turtle(590/2,100,3,start_state.character)
     P_bullet_list = [Player_bullet(player.x,player.y)]
     score=Score()
     count = 1
