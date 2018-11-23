@@ -10,14 +10,14 @@ GAME_WIDTH= 590
 
 name = "StartState"
 
-Character1 = None
-Character2 = None
-Character3 = None
+turtleImage = None
+grassImage = None
+lizardImage = None
+
 character = None
 background = None
 pointer=None
-cursurX=GAME_WIDTH/2
-cursurY=50
+
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 
 
@@ -36,17 +36,17 @@ class BackGround:
         BackGround.bgm.stop()
 class Pointer:
     def __init__(self):
-        self.x=0
-        self.y=0
+        self.x=GAME_WIDTH/2
+        self.y=50
         pass
 def enter():
-    global pointer,Character1,Character2,Character3,background
+    global pointer,turtleImage,grassImage,lizardImage,background
     global bestScore
     pointer=Pointer()
     background=BackGround()
-    Character1 = load_image(fileLink+'SelectImage\\CHAR1.png')
-    Character2 = load_image(fileLink+'SelectImage\\CHAR2.png')
-    Character3 = load_image(fileLink+'SelectImage\\CHAR3.png')
+    turtleImage = load_image(fileLink+'SelectImage\\CHAR1.png')
+    grassImage = load_image(fileLink+'SelectImage\\CHAR2.png')
+    lizardImage = load_image(fileLink+'SelectImage\\CHAR3.png')
     bestScore = Score()
     pass
 def turn_on_music():
@@ -54,19 +54,20 @@ def turn_on_music():
     pass
 
 def exit():
-    global Character1,Character2,Character3,background
+    global turtleImage,grassImage,lizardImage,background,pointer
     background.exit()
-    del (Character1)
-    del (Character2)
-    del (Character3)
+    del (turtleImage)
+    del (grassImage)
+    del (lizardImage)
     del(background)
+    del(pointer)
 
 
 def pause():
     background.exit()
     pass
 def handle_events():
-    global cursurY,cursurX,character,pointer
+    global character,pointer
 
     events=get_events()
     for event in events:
@@ -105,12 +106,11 @@ def update():
 
 
 def draw():
-    global Character1, Character2, Character3,back_groundImage,turtleButton,grassButton,lizardButton
 #595 889
     clear_canvas()
     background.draw()
-    Character1.draw(65 + 75, 357 - 75, 150 + (turtleButton * 40), 150 + (turtleButton * 40))
-    Character2.draw(65 + 75 + 75*2 + 10, 357 - 75, 150 + (grassButton * 40), 150 + (grassButton * 40))
-    Character3.draw(65 + 75 + 75*4 + 20, 357 - 75, 150 + (lizardButton * 40), 150 + (lizardButton * 40))
+    turtleImage.draw(65 + 75, 357 - 75, 150 + (turtleButton * 40), 150 + (turtleButton * 40))
+    grassImage.draw(65 + 75 + 75*2 + 10, 357 - 75, 150 + (grassButton * 40), 150 + (grassButton * 40))
+    lizardImage.draw(65 + 75 + 75*4 + 20, 357 - 75, 150 + (lizardButton * 40), 150 + (lizardButton * 40))
     update_canvas()
     pass
