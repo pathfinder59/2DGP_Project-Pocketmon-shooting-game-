@@ -10,8 +10,7 @@ fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 from gameBullet import Player_bullet
 from character import Character
 import play_state
-move_list=[]
-SKILL_COOLTIME={0:30,1:30,2:25}
+
 
 RIGHT_DOWN,LEFT_DOWN,TOP_DOWN,UNDER_DOWN,RIGHT_UP,LEFT_UP,TOP_UP,UNDER_UP,SHIFT_DOWN,SHIFT_UP=range(10)
 key_event_table = {
