@@ -149,7 +149,7 @@ class Turtle(Character):
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0
-        # fill here
+
         self.event_que = []
         self.cur_state = RunState
         self.cur_state.enter(self,None)

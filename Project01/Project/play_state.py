@@ -13,7 +13,6 @@ import pause_state
 from turtle import Turtle
 from lizard import Lizard
 from grass import Grass
-from player import Player
 from gameBullet import Player_bullet
 from administrator import Administrator
 
@@ -168,7 +167,7 @@ def update():
 
 
     #E_time=(E_time+1)%2000
-    if int(pico2d.get_time()-B_time)>=20:
+    if int(pico2d.get_time()-B_time)>=50:
         B_time=pico2d.get_time()
         if count<3:
             count+=1
