@@ -41,86 +41,88 @@ TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_PLAYER = 9
 FRAMES_PER_SKILL = 10
+
 class RunState:
-    def enter(Grass,event):
+    def enter(Lizard,event):
         if event == RIGHT_DOWN:
-            Grass.velocityX += Grass.speed
+            Lizard.velocityX += Lizard.speed
         elif event == RIGHT_UP:
-            Grass.velocityX -= Grass.speed
+            Lizard.velocityX -= Lizard.speed
         if event == LEFT_DOWN:
-            Grass.velocityX -= Grass.speed
+            Lizard.velocityX -= Lizard.speed
         elif event == LEFT_UP:
-            Grass.velocityX += Grass.speed
+            Lizard.velocityX += Lizard.speed
         if event == TOP_DOWN:
-            Grass.velocityY += Grass.speed
+            Lizard.velocityY += Lizard.speed
         elif event == TOP_UP:
-            Grass.velocityY -= Grass.speed
+            Lizard.velocityY -= Lizard.speed
         if event == UNDER_DOWN:
-            Grass.velocityY -= Grass.speed
+            Lizard.velocityY -= Lizard.speed
         elif event == UNDER_UP:
-            Grass.velocityY += Grass.speed
+            Lizard.velocityY += Lizard.speed
 
         if event == SHIFT_DOWN:
-            if Grass.velocityX > 0:
-                Grass.velocityX -= SLOW_SPEED_PPS
-            elif Grass.velocityX < 0:
-                Grass.velocityX += SLOW_SPEED_PPS
-            if Grass.velocityY > 0:
-                Grass.velocityY -= SLOW_SPEED_PPS
-            elif Grass.velocityY < 0:
-                Grass.velocityY += SLOW_SPEED_PPS
-            Grass.speed = RUN_SPEED_PPS-SLOW_SPEED_PPS
+            if Lizard.velocityX > 0:
+                Lizard.velocityX -= SLOW_SPEED_PPS
+            elif Lizard.velocityX < 0:
+                Lizard.velocityX += SLOW_SPEED_PPS
+            if Lizard.velocityY > 0:
+                Lizard.velocityY -= SLOW_SPEED_PPS
+            elif Lizard.velocityY < 0:
+                Lizard.velocityY += SLOW_SPEED_PPS
+            Lizard.speed = RUN_SPEED_PPS-SLOW_SPEED_PPS
             pass
         elif event == SHIFT_UP:
-            if Grass.velocityX > 0:
-                Grass.velocityX += SLOW_SPEED_PPS
-            elif Grass.velocityX < 0:
-                Grass.velocityX -= SLOW_SPEED_PPS
-            if Grass.velocityY > 0:
-                Grass.velocityY += SLOW_SPEED_PPS
-            elif Grass.velocityY < 0:
-                Grass.velocityY -= SLOW_SPEED_PPS
-            Grass.speed = RUN_SPEED_PPS
+            if Lizard.velocityX > 0:
+                Lizard.velocityX += SLOW_SPEED_PPS
+            elif Lizard.velocityX < 0:
+                Lizard.velocityX -= SLOW_SPEED_PPS
+            if Lizard.velocityY > 0:
+                Lizard.velocityY += SLOW_SPEED_PPS
+            elif Lizard.velocityY < 0:
+                Lizard.velocityY -= SLOW_SPEED_PPS
+            Lizard.speed = RUN_SPEED_PPS
             pass
 
-        Grass.dir=Grass.velocityX
+        Lizard.dir=Lizard.velocityX
 
-    def exit(Grass,event):
+    def exit(Lizard,event):
         pass
 
-    def update(Grass):
+    def update(Lizard):
+        E_bullet_list=play_state.get_eBulletList()
         P_bullet_list=play_state.get_pBulletList()
 
-        Grass.x += Grass.velocityX * game_framework.frame_time
-        Grass.x = clamp(25, Grass.x, 590 - 25)
-        Grass.y += Grass.velocityY * game_framework.frame_time
-        Grass.y = clamp(25, Grass.y, 875 - 25)
+        Lizard.x += Lizard.velocityX * game_framework.frame_time
+        Lizard.x = clamp(25, Lizard.x, 590 - 25)
+        Lizard.y += Lizard.velocityY * game_framework.frame_time
+        Lizard.y = clamp(25, Lizard.y, 875 - 25)
 
-        if Grass.skillSwitch:
+        if Lizard.skillSwitch:
 
-            Grass.skillframe=(Grass.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
-            if pico2d.get_time()-Grass.skilltime>=5:
-                Grass.skillSwitch = False
-                Grass.attack = 1
+            Lizard.skillframe=(Lizard.skillframe+ FRAMES_PER_SKILL*ACTION_PER_TIME*game_framework.frame_time)%10
+            if pico2d.get_time()-Lizard.skilltime>=5:
+                Lizard.skillSwitch = False
+                Lizard.attack = 1
 
-        Grass.check_collision()
+        Lizard.check_collision()
 
-        if pico2d.get_time()-Grass.count>=0.15 :  #일종의 타이머로 총알 생성
-            P_bullet_list.append(Player_bullet(Grass.x, Grass.y))
-            Grass.count=get_time()
+        if pico2d.get_time()-Lizard.count>=0.15 :  #일종의 타이머로 총알 생성
+            P_bullet_list.append(Player_bullet(Lizard.x, Lizard.y))
+            Lizard.count=get_time()
 
 
-    def draw(Grass):
-        if Grass.hitSwitch:
-            Grass.image.opacify(random.random())
-            if pico2d.get_time()-Grass.hitcount>=3:
-                Grass.image.opacify(1)
-                Grass.hitSwitch=False
+    def draw(Lizard):
+        if Lizard.hitSwitch:
+            Lizard.image.opacify(random.random())
+            if pico2d.get_time()-Lizard.hitcount>=3:
+                Lizard.image.opacify(1)
+                Lizard.hitSwitch=False
 
-        Grass.image.clip_draw(int(Grass.frame) * 40, 40 * Grass.Type, 40, 40, Grass.x, Grass.y)
-        if Grass.skillSwitch:
-            Grass.skill_image.clip_draw(int(Grass.skillframe)*50,50*Grass.Type,50,50,Grass.x,Grass.y)
-            pass
+        Lizard.image.clip_draw(int(Lizard.frame) * 40, 40 * Lizard.Type, 40, 40, Lizard.x, Lizard.y)
+        if Lizard.skillSwitch:
+            Lizard.skill_image.clip_draw(int(Lizard.skillframe)*50,50*Lizard.Type,50,50,Lizard.x,Lizard.y)
+
 
 
 next_state_table = {
@@ -133,7 +135,7 @@ next_state_table = {
 
 
 
-class Grass(Character):
+class Lizard(Character):
     def __init__(self,x,y,Hp,type):
         super().__init__(x,y,Hp)
         self.Type=type
@@ -143,17 +145,17 @@ class Grass(Character):
 
         self.skilltime=None
         self.skillframe=0
-        self.skillCooltime=pico2d.get_time()-30
+        self.skillCooltime=pico2d.get_time()-25
         self.speed=RUN_SPEED_PPS
         self.skillSwitch=False
         self.hitSwitch=False
         self.hitcount=0
-        Grass.image = load_image(fileLink+'Character\\player1.png')
-        Grass.skill_image=load_image(fileLink+'Skill\\skill.png')
+        Lizard.image = load_image(fileLink+'Character\\player1.png')
+        Lizard.skill_image=load_image(fileLink+'Skill\\skill.png')
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0
-
+        # fill here
         self.event_que = []
         self.cur_state = RunState
         self.cur_state.enter(self,None)
@@ -190,11 +192,36 @@ class Grass(Character):
 
         ##적총알 플레이어 타격시 타입이 거북이&스킬중이면 피격x
     def skill(self):
-        if pico2d.get_time()-self.skillCooltime>=30:
+        if pico2d.get_time()-self.skillCooltime>=25:
             self.skillSwitch=True
             self.skilltime=pico2d.get_time()
+
             self.skillCooltime=pico2d.get_time()
-            self.hp=self.hp+1
+            self.sCount=-1
+            if self.Type== 2 : ##이상해씨
+                self.hp=self.hp+1
+                pass
+            elif self.Type==1: ##파이리
+                self.attack=4
+                pass
+            elif self.Type==0: ##꼬부기
+                pass
+
+    #def change_state(self,  state):
+     #   self.cur_state.exit(self,key_event)
+        #if state==IdleState:
+            #if len(move_list) > 0:
+             #   del move_list[0]
+            #if len(move_list)>0:
+            #    pass
+            #else:
+#                self.cur_state=state
+
+ #       if state == RunState:
+  #          move_list.append(state)
+      #  self.cur_state = state
+       # self.cur_state.enter(self,event)
+        pass
 
 
     def add_event(self, event):
