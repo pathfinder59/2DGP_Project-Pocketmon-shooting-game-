@@ -89,6 +89,7 @@ def returnState(state):
     while state!=stack[-1]:
         stack[-1].exit()
         stack.pop()
+    stack[-1].turn_on_music()
 
 
 def quit():

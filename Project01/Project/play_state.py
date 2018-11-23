@@ -40,16 +40,29 @@ back_groundImage=None
 score=None
 player=None
 life=None
-
+backGround=None
+fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 E_time=None
 
-fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
-def pause():
-    pass
+class BackGround:
+    def __init__(self):
+        BackGround.Image = load_image(fileLink + 'Screen\\GAMEPrint.png')
+        BackGround.bgm=load_music(fileLink+'Screen\\playMusic.mp3')
+        BackGround.bgm.set_volume(40)
+        BackGround.bgm.repeat_play()
+    def update(self):
+        pass
+    def draw(self):
+        BackGround.Image.draw(GAME_WIDTH / 2, GAME_HEIGHT / 2)
+        pass
+    def exit(self):
+        BackGround.bgm.stop()
+
+
 
 def enter():
-    global back_groundImage,score,player,life,P_bullet_list,E_time,B_time,count,admin
-    back_groundImage=load_image(fileLink+'Screen\\GAMEPrint.png')
+    global backGround,score,player,life,P_bullet_list,E_time,B_time,count,admin
+    backGround=BackGround()
     player=Player(590/2,100,3,start_state.character)
     P_bullet_list = [Player_bullet(player.x,player.y)]
     score=Score()
@@ -58,12 +71,15 @@ def enter():
     life=Life()
     E_time=pico2d.get_time()
     B_time = pico2d.get_time()
-
+def pause():
+    backGround.exit()
+    pass
 
 
 def exit():
-    global back_groundImage,score,player,life,P_bullet_list,E_bullet_list
-    del(back_groundImage)
+    global backGround,score,player,life,P_bullet_list,E_bullet_list
+    backGround.exit()
+    del(backGround)
     del(player)
     del(life)
     del(score)
@@ -85,6 +101,9 @@ def get_EnemyList():
 def pause():
     pass
 
+def turn_on_music():
+    backGround.bgm.repeat_play()
+    pass
 
 
 def resume():
@@ -98,6 +117,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            backGround.exit()
             game_framework.push_state(over_state)
         elif event.type==SDL_KEYDOWN and event.key==SDLK_p:
             game_framework.push_state(pause_state)
@@ -162,7 +182,8 @@ def update():
 def draw():
     global  back_groundImage,P_bullet_list
     clear_canvas()
-    back_groundImage.draw(GAME_WIDTH / 2, GAME_HEIGHT / 2)
+
+    backGround.draw()
     life.draw(player)
     score.draw(224,30)
     for i in range(len(P_bullet_list)):
