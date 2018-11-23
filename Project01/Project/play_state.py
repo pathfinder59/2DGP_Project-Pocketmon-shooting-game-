@@ -11,6 +11,8 @@ import over_state
 import pause_state
 
 from turtle import Turtle
+from lizard import Lizard
+from grass import Grass
 from player import Player
 from gameBullet import Player_bullet
 from administrator import Administrator
@@ -25,7 +27,7 @@ from flowerShooter import FlowerShooter
 from aimShooter import AimShooter
 
 
-
+Player_type_table={0:Turtle, 1:Lizard,2:Grass}
 Enemy_table={
     0:LineShooter,1:PinWheelShooter,2:SpinShooter,3:AimShooter,4:FlowerShooter
 }
@@ -64,7 +66,7 @@ class BackGround:
 def enter():
     global backGround,score,player,life,P_bullet_list,E_time,B_time,count,admin
     backGround=BackGround()
-    player=Turtle(590/2,100,3,start_state.character)
+    player=Player_type_table[start_state.character](590/2,100,3,start_state.character)
     P_bullet_list = [Player_bullet(player.x,player.y)]
     score=Score()
     count = 1

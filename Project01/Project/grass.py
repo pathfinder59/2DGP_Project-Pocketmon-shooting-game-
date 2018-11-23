@@ -116,9 +116,9 @@ class RunState:
                 Grass.image.opacify(1)
                 Grass.hitSwitch=False
 
-        Grass.image.clip_draw(int(Grass.frame) * 40, 40 * Grass.Type, 40, 40, Grass.x, Grass.y)
+        Grass.image.clip_draw(int(Grass.frame) * 40, 40 * 2, 40, 40, Grass.x, Grass.y)
         if Grass.skillSwitch:
-            Grass.skill_image.clip_draw(int(Grass.skillframe)*50,50*Grass.Type,50,50,Grass.x,Grass.y)
+            Grass.skill_image.clip_draw(int(Grass.skillframe)*50,50*2,50,50,Grass.x,Grass.y)
             pass
 
 

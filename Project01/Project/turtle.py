@@ -114,9 +114,9 @@ class RunState:
                 Turtle.image.opacify(1)
                 Turtle.hitSwitch=False
 
-        Turtle.image.clip_draw(int(Turtle.frame) * 40, 40 * Turtle.Type, 40, 40, Turtle.x, Turtle.y)
+        Turtle.image.clip_draw(int(Turtle.frame) * 40, 0, 40, 40, Turtle.x, Turtle.y)
         if Turtle.skillSwitch:
-            Turtle.skill_image.clip_draw(int(Turtle.skillframe)*50,50*Turtle.Type,50,50,Turtle.x,Turtle.y)
+            Turtle.skill_image.clip_draw(int(Turtle.skillframe)*50,0,50,50,Turtle.x,Turtle.y)
             pass
 
 

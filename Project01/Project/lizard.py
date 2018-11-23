@@ -119,9 +119,9 @@ class RunState:
                 Lizard.image.opacify(1)
                 Lizard.hitSwitch=False
 
-        Lizard.image.clip_draw(int(Lizard.frame) * 40, 40 * Lizard.Type, 40, 40, Lizard.x, Lizard.y)
+        Lizard.image.clip_draw(int(Lizard.frame) * 40, 40 * 1, 40, 40, Lizard.x, Lizard.y)
         if Lizard.skillSwitch:
-            Lizard.skill_image.clip_draw(int(Lizard.skillframe)*50,50*Lizard.Type,50,50,Lizard.x,Lizard.y)
+            Lizard.skill_image.clip_draw(int(Lizard.skillframe)*50,50*1,50,50,Lizard.x,Lizard.y)
 
 
 
