@@ -107,9 +107,9 @@ class RunState:
 
         Lizard.check_collision()
 
-        if pico2d.get_time()-Lizard.count>=0.15 :  #일종의 타이머로 총알 생성
+        if pico2d.get_time()-Lizard.shoottime>=0.15 :  #일종의 타이머로 총알 생성
             P_bullet_list.append(Player_bullet(Lizard.x, Lizard.y))
-            Lizard.count=get_time()
+            Lizard.shoottime=get_time()
 
 
     def draw(Lizard):
@@ -136,11 +136,11 @@ next_state_table = {
 
 
 class Lizard(Character):
-    def __init__(self,x,y,Hp,type):
+    def __init__(self,x,y,Hp):
         super().__init__(x,y,Hp)
-        self.Type=type
+        self.Type=1
         self.attack=1
-        self.count=pico2d.get_time()
+        self.shoottime=pico2d.get_time()
         self.frame=0
 
         self.skilltime=None

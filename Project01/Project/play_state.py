@@ -66,7 +66,7 @@ class BackGround:
 def enter():
     global backGround,score,player,life,P_bullet_list,E_time,B_time,count,admin
     backGround=BackGround()
-    player=Player_type_table[start_state.character](590/2,100,3,start_state.character)
+    player=Player_type_table[start_state.character](590/2,100,3)
     P_bullet_list = [Player_bullet(player.x,player.y)]
     score=Score()
     count = 1

@@ -102,9 +102,9 @@ class RunState:
                 Turtle.skillSwitch = False
         Turtle.check_collision()
 
-        if pico2d.get_time()-Turtle.count>=0.15 :  #일종의 타이머로 총알 생성
+        if pico2d.get_time()-Turtle.shoottime>=0.15 :  #일종의 타이머로 총알 생성
             P_bullet_list.append(Player_bullet(Turtle.x, Turtle.y))
-            Turtle.count=get_time()
+            Turtle.shoottime=get_time()
 
 
     def draw(Turtle):
@@ -131,11 +131,11 @@ next_state_table = {
 
 
 class Turtle(Character):
-    def __init__(self,x,y,Hp,type):
+    def __init__(self,x,y,Hp):
         super().__init__(x,y,Hp)
-        self.Type=type
+        self.Type=0
         self.attack=1
-        self.count=pico2d.get_time()
+        self.shoottime=pico2d.get_time()
         self.frame=0
 
         self.skilltime=None
