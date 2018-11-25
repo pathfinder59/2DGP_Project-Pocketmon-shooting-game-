@@ -163,6 +163,7 @@ class Lizard(Character):
         for i in E_bullet_list:
             if math.sqrt((i.x - self.x) ** 2 + (i.y - self.y) ** 2) < 9:
                 if self.hitSwitch == False:
+                    self.hitSound.play()
                     self.hp = self.hp - 1
                     self.hitcount = pico2d.get_time()
                     self.hitSwitch = True

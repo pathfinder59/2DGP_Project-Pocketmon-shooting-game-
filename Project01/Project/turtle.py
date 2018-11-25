@@ -163,6 +163,7 @@ class Turtle(Character):
                      pass
                 else:
                     if self.hitSwitch==False:
+                        self.hitSound.play()
                         self.hp=self.hp-1
                         self.hitcount=pico2d.get_time()
                         self.hitSwitch=True

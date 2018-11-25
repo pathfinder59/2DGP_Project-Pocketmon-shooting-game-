@@ -52,6 +52,8 @@ class FlowerShooter(Character):
             else:
                 i=i+1
         if self.hp<0 or (self.moveBit==1 and self.y>890):
+            if self.hp<0:
+                self.hitSound.play()
             return True
         if len(self.event_que) > 0:
             event = self.event_que.pop()
