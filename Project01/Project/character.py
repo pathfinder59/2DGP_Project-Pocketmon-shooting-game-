@@ -16,4 +16,4 @@ class Character:
         self.y = y
         self.hp=Hp
         Character.image=load_image(fileLink+'Character\\trainner.png')
-        Character.hitSound=load_music(fileLink+'Character\\hitS')
+        Character.hitSound=load_music(fileLink+'Character\\hitSound.wav')
