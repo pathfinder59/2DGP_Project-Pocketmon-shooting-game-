@@ -85,9 +85,7 @@ def handle_events():
         elif event.type==SDL_MOUSEMOTION:
             pointer.y=875-event.y
             pointer.x=event.x
-        elif event.type == SDL_QUIT:
-            game_framework.quit()
-        elif event.type ==SDLK_ESCAPE:
+        elif event.type == SDL_KEYDOWN and event.key==SDLK_ESCAPE:
             game_framework.quit()
 
 def update():
