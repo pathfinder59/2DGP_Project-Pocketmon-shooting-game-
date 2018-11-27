@@ -22,7 +22,7 @@ FRAMES_PER_ENEMY = 3
 
 class SpinShooter(Character):
     def __init__(self, x, y):
-        super().__init__(x, y,8)
+        super().__init__(x, y,14)
 
         self.type=2
         self.pattern=random.randint(1,2)

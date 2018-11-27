@@ -23,7 +23,7 @@ FRAMES_PER_ENEMY = 3
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 class FlowerShooter(Character):
     def __init__(self, x, y):
-        super().__init__(x, y,15)
+        super().__init__(x, y,20)
 
         self.type=4
         self.pattern=random.randint(1,2)

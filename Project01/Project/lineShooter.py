@@ -24,7 +24,7 @@ FRAMES_PER_ENEMY = 3
 
 class LineShooter(Character):
     def __init__(self, x, y):
-        super().__init__(x, y,7)
+        super().__init__(x, y,14)
 
         self.type=0
         self.pattern=random.randint(1,2)
