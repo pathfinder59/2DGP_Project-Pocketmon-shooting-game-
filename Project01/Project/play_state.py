@@ -167,7 +167,7 @@ def update():
 
 
     #E_time=(E_time+1)%2000
-    if int(pico2d.get_time()-B_time)>=50:
+    if int(pico2d.get_time()-B_time)>=60:
         B_time=pico2d.get_time()
         if count<3:
             count+=1

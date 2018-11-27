@@ -111,7 +111,7 @@ class IdleState:
         if pico2d.get_time()-Enemy.shoot_time>=0.2 :
             Enemy.add_event(ShootState)
             pass
-        if pico2d.get_time()-Enemy.lifetime>=18:
+        if pico2d.get_time()-Enemy.lifetime>=30:
             Enemy.moveBit=1
             Enemy.add_event(MoveState)
     @staticmethod

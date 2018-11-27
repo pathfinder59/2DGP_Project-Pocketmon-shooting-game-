@@ -133,7 +133,7 @@ class Turtle(Character):
     def __init__(self,x,y,Hp):
         super().__init__(x,y,Hp)
         self.Type=0
-        self.attack=1
+        self.attack=2
         self.shoottime=pico2d.get_time()
         self.frame=0
 

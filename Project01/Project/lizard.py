@@ -190,7 +190,7 @@ class Lizard(Character):
 
         ##적총알 플레이어 타격시 타입이 거북이&스킬중이면 피격x
     def skill(self):
-        if pico2d.get_time()-self.skillCooltime>=25:
+        if pico2d.get_time()-self.skillCooltime>=18:
             self.skillSwitch=True
             self.skilltime=pico2d.get_time()
             self.skillCooltime=pico2d.get_time()
