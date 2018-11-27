@@ -4,6 +4,7 @@ import game_framework
 from pico2d import *
 import play_state
 from score import Score
+import pickle
 
 GAME_HEIGHT= 875
 GAME_WIDTH= 590
@@ -13,6 +14,7 @@ name = "StartState"
 turtleImage = None
 grassImage = None
 lizardImage = None
+bestScore=None
 
 character = None
 background = None
@@ -48,6 +50,7 @@ def enter():
     grassImage = load_image(fileLink+'SelectImage\\CHAR2.png')
     lizardImage = load_image(fileLink+'SelectImage\\CHAR3.png')
     bestScore = Score()
+    load()
     pass
 def turn_on_music():
     background.bgm.repeat_play()
@@ -62,8 +65,15 @@ def exit():
     del(background)
     del(pointer)
 
-
+def save():
+    with open('score.sav', 'wb') as f:
+        pickle.dump(bestScore, f)
+def load():
+    global bestScore
+    with open('score.sav', 'rb') as f:
+        bestScore = pickle.load(f)
 def pause():
+
     background.exit()
     pass
 def handle_events():
@@ -86,6 +96,7 @@ def handle_events():
             pointer.y=875-event.y
             pointer.x=event.x
         elif event.type == SDL_KEYDOWN and event.key==SDLK_ESCAPE:
+            save()
             game_framework.quit()
 
 def update():
