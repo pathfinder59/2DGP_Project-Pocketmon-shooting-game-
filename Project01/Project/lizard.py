@@ -194,6 +194,7 @@ class Lizard(Character):
             self.skillSwitch=True
             self.skilltime=pico2d.get_time()
             self.skillCooltime=pico2d.get_time()
+            
             self.attack=4
 
 
