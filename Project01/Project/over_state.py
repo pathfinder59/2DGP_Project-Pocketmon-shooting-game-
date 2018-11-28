@@ -55,9 +55,9 @@ def handle_events():
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
-        elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
+        elif event.type==SDL_KEYDOWN and event.key==SDLK_ESCAPE:
             game_framework.returnState(start_state)
-        elif event.type == SDL_KEYDOWN:
+        elif event.type == SDL_MOUSEBUTTONDOWN and event.button == SDL_BUTTON_LEFT:
             game_framework.returnState(start_state)
 
 
