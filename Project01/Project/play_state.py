@@ -153,7 +153,6 @@ def update():
 
     while i < len(E_bullet_list):
         if E_bullet_list[i].update():
-            score.current_score+=20
             del E_bullet_list[i]
         else:
             i = i + 1
@@ -162,6 +161,7 @@ def update():
 
     while i < len(Enemy_list):
         if Enemy_list[i].update(P_bullet_list,player,E_bullet_list) :
+            score.current_score+=Enemy_list[i].score
             del Enemy_list[i]
         else:
             i=i+1
