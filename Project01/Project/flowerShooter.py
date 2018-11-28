@@ -46,7 +46,7 @@ class FlowerShooter(Character):
         i=0
 
         while i < len(P_bullet_list):
-            if math.sqrt((P_bullet_list[i].x-self.x)**2+(P_bullet_list[i].y-self.y)**2)<20 :
+            if math.sqrt((P_bullet_list[i].x-self.x)**2+(P_bullet_list[i].y-self.y)**2)<35 :
                 self.hp=self.hp-player.attack
                 del P_bullet_list[i]
             else:
@@ -94,7 +94,7 @@ class MoveState:
 
     @staticmethod
     def draw(Enemy):
-        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
+        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y,160,160)
 
     pass
 
@@ -116,7 +116,7 @@ class IdleState:
             Enemy.add_event(MoveState)
     @staticmethod
     def draw(Enemy):
-        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
+        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y,160,160)
 
 
 class ShootState:
@@ -156,4 +156,4 @@ class ShootState:
 
     @staticmethod
     def draw(Enemy):
-        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
+        Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y,160,160)

@@ -16,8 +16,12 @@ class BackGround:
     def __init__(self):
         BackGround.Image = load_image(fileLink + 'Screen\\GAMEOVER.png')
         BackGround.bgm=load_music(fileLink+'Screen\\overMusic.mp3')
-        BackGround.bgm.set_volume(40)
+        BackGround.bgm.set_volume(20)
         BackGround.bgm.repeat_play()
+        BackGround.bestBgm=load_wav(fileLink + 'Screen\\bestScore.wav')
+        BackGround.bestBgm.set_volume(60)
+        if play_state.score_renew:
+            BackGround.bestBgm.play()
     def update(self):
         pass
     def draw(self):

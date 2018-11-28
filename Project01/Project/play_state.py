@@ -45,6 +45,7 @@ life=None
 backGround=None
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 E_time=None
+score_renew=False
 
 class BackGround:
     def __init__(self):
@@ -131,7 +132,7 @@ def handle_events():
 
 
 def update():
-    global P_bullet_list,E_time,player,E_bullet_list,count,B_time
+    global score_renew,P_bullet_list,E_time,player,E_bullet_list,count,B_time
     score.update()
     life.update()
     if player.update(P_bullet_list,E_bullet_list):
@@ -139,26 +140,22 @@ def update():
     else :
         if start_state.bestScore.current_score<score.current_score:
             start_state.bestScore.current_score=score.current_score
+            score_renew=True
         game_framework.push_state(over_state)
-        pass   #게임오버 구현 미완성
-    i=0
 
+    i=0
     while i<len(P_bullet_list):
         if P_bullet_list[i].update():
             del P_bullet_list[i]
         else:
             i=i+1
-
     i = 0
-
     while i < len(E_bullet_list):
         if E_bullet_list[i].update():
             del E_bullet_list[i]
         else:
             i = i + 1
-
     i=0
-
     while i < len(Enemy_list):
         if Enemy_list[i].update(P_bullet_list,player,E_bullet_list) :
             score.current_score+=Enemy_list[i].score
@@ -167,7 +164,7 @@ def update():
             i=i+1
 
 
-    #E_time=(E_time+1)%2000
+
     if int(pico2d.get_time()-B_time)>=60:
         B_time=pico2d.get_time()
         if count<3:
@@ -177,8 +174,7 @@ def update():
     elif int(pico2d.get_time()-E_time)>=3:
         E_time=pico2d.get_time()
         admin.update()
-        #for i in range(count):
-            #Enemy_list.append(Enemy_table[random.randint(0,3)](random.randint(20,550),GAME_HEIGHT+15))
+
 
 
 
