@@ -112,6 +112,8 @@ class RunState:
             if pico2d.get_time()-Turtle.hitcount>=3:
                 Turtle.image.opacify(1)
                 Turtle.hitSwitch=False
+        if pico2d.get_time() - Turtle.skillCooltime >= 30:
+            Turtle.skill_icon.draw(20,150)
 
         Turtle.image.clip_draw(int(Turtle.frame) * 40, 0, 40, 40, Turtle.x, Turtle.y)
         if Turtle.skillSwitch:
@@ -146,6 +148,7 @@ class Turtle(Character):
         self.hitcount=0
         Turtle.image = load_image(fileLink+'Character\\player1.png')
         Turtle.skill_image=load_image(fileLink+'Skill\\skill.png')
+        Turtleskill_icon = load_image(fileLink + 'Skill\\shiedSkill.png')
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0

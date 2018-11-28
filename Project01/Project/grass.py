@@ -114,7 +114,8 @@ class RunState:
             if pico2d.get_time()-Grass.hitcount>=3:
                 Grass.image.opacify(1)
                 Grass.hitSwitch=False
-
+        if pico2d.get_time() - Grass.skillCooltime >= 30:
+            Grass.skill_icon.draw(20,150)
         Grass.image.clip_draw(int(Grass.frame) * 40, 40 * 2, 40, 40, Grass.x, Grass.y)
         if Grass.skillSwitch:
             Grass.skill_image.clip_draw(int(Grass.skillframe)*50,50*2,50,50,Grass.x,Grass.y)
@@ -148,6 +149,7 @@ class Grass(Character):
         self.hitcount=0
         Grass.image = load_image(fileLink+'Character\\player1.png')
         Grass.skill_image=load_image(fileLink+'Skill\\skill.png')
+        Grass.skill_icon = load_image(fileLink + 'Skill\\healSkill.png')
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0
