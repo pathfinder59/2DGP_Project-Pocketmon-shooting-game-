@@ -60,6 +60,7 @@ class AimShooter(Character):
 
     def draw(self):
         self.cur_state.draw(self)
+        self.locateImage.draw(self.x,20)
         pass
 
     def change_state(self,  state):

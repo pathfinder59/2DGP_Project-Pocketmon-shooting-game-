@@ -18,3 +18,4 @@ class Character:
         Character.image=load_image(fileLink+'Character\\trainner.png')
         Character.hitSound=load_wav(fileLink+'Character\\hitSound.wav')
         Character.hitSound.set_volume(50)
+        Character.locateImage=(fileLink+'Character\\enemyLocate.png')
