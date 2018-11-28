@@ -62,6 +62,7 @@ class LineShooter(Character):
 
     def draw(self):
         self.cur_state.draw(self)
+        self.locateImage.draw(self.x, 60)
         pass
 
     def change_state(self,  state):

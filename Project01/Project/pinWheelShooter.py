@@ -34,7 +34,6 @@ class PinWheelShooter(Character):
         self.shoot_time=0
         self.shoot_angle=0
         self.angle_rate=0.02
-
         self.event_que = []
         self.cur_state = MoveState
         self.cur_state.enter(self)
@@ -65,6 +64,7 @@ class PinWheelShooter(Character):
 
     def draw(self):
         self.cur_state.draw(self)
+        self.locateImage.draw(self.x, 60)
         pass
 
     def change_state(self,  state):

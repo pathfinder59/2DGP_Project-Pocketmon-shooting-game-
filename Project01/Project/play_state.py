@@ -184,19 +184,17 @@ def draw():
 
     backGround.draw()
     life.draw(player)
-    score.draw(224,30)
     for i in range(len(P_bullet_list)):
         P_bullet_list[i].draw(player)
     for i in range(len(Enemy_list)):
         Enemy_list[i].draw()
     for i in range(len(E_bullet_list)):
         E_bullet_list[i].draw(player)
-
+    score.draw(224, 30)
 
     player.draw()
 
     update_canvas()
-    #delay(0.02)
 
 
 
