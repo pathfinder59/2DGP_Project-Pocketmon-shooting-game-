@@ -148,7 +148,7 @@ class Turtle(Character):
         self.hitcount=0
         Turtle.image = load_image(fileLink+'Character\\player1.png')
         Turtle.skill_image=load_image(fileLink+'Skill\\skill.png')
-        Turtleskill_icon = load_image(fileLink + 'Skill\\shiedSkill.png')
+        Turtle.skill_icon = load_image(fileLink + 'Skill\\shieldSkill.png')
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0

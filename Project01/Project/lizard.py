@@ -115,8 +115,8 @@ class RunState:
             if pico2d.get_time()-Lizard.hitcount>=3:
                 Lizard.image.opacify(1)
                 Lizard.hitSwitch=False
-        if pico2d.get_time() - Lizard.skillCooltime >= 30:
-            Lizard.skill_icon.draw(20,150)
+        if pico2d.get_time() - Lizard.skillCooltime >=18 :
+            Lizard.skill_icon.draw(20, 150)
         Lizard.image.clip_draw(int(Lizard.frame) * 40, 40 * 1, 40, 40, Lizard.x, Lizard.y)
         if Lizard.skillSwitch:
             Lizard.skill_image.clip_draw(int(Lizard.skillframe)*50,50*1,50,50,Lizard.x,Lizard.y)
@@ -151,6 +151,11 @@ class Lizard(Character):
         Lizard.image = load_image(fileLink+'Character\\player1.png')
         Lizard.skill_image=load_image(fileLink+'Skill\\skill.png')
         Lizard.skill_icon=load_image(fileLink+'Skill\\attackSkill.png')
+
+        Lizard.bgm = load_music(fileLink + 'Screen\\overMusic.mp3')
+        Lizard.bgm.set_volume(70)
+        Lizard.bgm.play()
+
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0
