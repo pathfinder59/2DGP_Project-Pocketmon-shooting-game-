@@ -36,7 +36,7 @@ class SpinShooter(Character):
         self.event_que = []
         self.cur_state = MoveState
         self.cur_state.enter(self)
-
+        self.score=18
     def update(self,P_bullet_list,player,E_bullet_list):
         # self.time=(self.time+1)%10
         # if self.time%10==0:

@@ -39,6 +39,7 @@ class LineShooter(Character):
         self.cur_state = MoveState
         self.cur_state.enter(self)
 
+        self.score=10
     def update(self,P_bullet_list,player,E_bullet_list):
         self.frame=(self.frame+FRAMES_PER_ENEMY*ACTION_PER_TIME*game_framework.frame_time)%3
         i=0
