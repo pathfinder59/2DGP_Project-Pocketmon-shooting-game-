@@ -149,6 +149,9 @@ class Turtle(Character):
         Turtle.image = load_image(fileLink+'Character\\player1.png')
         Turtle.skill_image=load_image(fileLink+'Skill\\skill.png')
         Turtle.skill_icon = load_image(fileLink + 'Skill\\shieldSkill.png')
+
+        Turtle.bgm = load_wav(fileLink + 'Skill\\shield.wav')
+        Turtle.bgm.set_volume(70)
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0
@@ -196,6 +199,7 @@ class Turtle(Character):
     def skill(self):
         if pico2d.get_time()-self.skillCooltime>=30:
             self.skillSwitch=True
+            Turtle.bgm.play()
             self.skilltime=pico2d.get_time()
             self.skillCooltime=pico2d.get_time()
         pass

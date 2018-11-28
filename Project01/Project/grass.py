@@ -150,6 +150,10 @@ class Grass(Character):
         Grass.image = load_image(fileLink+'Character\\player1.png')
         Grass.skill_image=load_image(fileLink+'Skill\\skill.png')
         Grass.skill_icon = load_image(fileLink + 'Skill\\healSkill.png')
+
+        Grass.bgm = load_wav(fileLink + 'Skill\\heal.wav')
+        Grass.bgm.set_volume(70)
+
         self.dir = 1
         self.velocityX = 0
         self.velocityY = 0
@@ -193,6 +197,7 @@ class Grass(Character):
     def skill(self):
         if pico2d.get_time()-self.skillCooltime>=30:
             self.skillSwitch=True
+            Grass.bgm.play()
             self.skilltime=pico2d.get_time()
             self.skillCooltime=pico2d.get_time()
             self.hp=self.hp+1

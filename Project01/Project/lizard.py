@@ -152,9 +152,9 @@ class Lizard(Character):
         Lizard.skill_image=load_image(fileLink+'Skill\\skill.png')
         Lizard.skill_icon=load_image(fileLink+'Skill\\attackSkill.png')
 
-        Lizard.bgm = load_music(fileLink + 'Screen\\overMusic.mp3')
+        Lizard.bgm = load_wav(fileLink + 'Skill\\attack.wav')
         Lizard.bgm.set_volume(70)
-        Lizard.bgm.play()
+
 
         self.dir = 1
         self.velocityX = 0
@@ -199,6 +199,7 @@ class Lizard(Character):
     def skill(self):
         if pico2d.get_time()-self.skillCooltime>=18:
             self.skillSwitch=True
+            Lizard.bgm.play()
             self.skilltime=pico2d.get_time()
             self.skillCooltime=pico2d.get_time()
 
