@@ -21,4 +21,4 @@ class Life:
 
         for i in range(player.hp):
             Life.image.clip_draw(int(self.lFrame) * 35, 0, 35, 35, 15 + i * 35, 100)
-    pass
+

@@ -80,7 +80,7 @@ class RunState:
             elif Turtle.velocityY < 0:
                 Turtle.velocityY -= SLOW_SPEED_PPS
             Turtle.speed = RUN_SPEED_PPS
-            pass
+
 
         Turtle.dir=Turtle.velocityX
 
@@ -102,7 +102,7 @@ class RunState:
         Turtle.check_collision()
 
         if pico2d.get_time()-Turtle.shoottime>=0.15 :  #일종의 타이머로 총알 생성
-            P_bullet_list.append(Player_bullet(Turtle.x, Turtle.y))
+            P_bullet_list.append(Player_bullet(Turtle.x, Turtle.y,Turtle.attack))
             Turtle.shoottime=get_time()
 
 
@@ -118,14 +118,14 @@ class RunState:
         Turtle.image.clip_draw(int(Turtle.frame) * 40, 0, 40, 40, Turtle.x, Turtle.y)
         if Turtle.skillSwitch:
             Turtle.skill_image.clip_draw(int(Turtle.skillframe)*50,0,50,50,Turtle.x,Turtle.y)
-            pass
+
 
 
 next_state_table = {
     RunState:{RIGHT_UP:RunState,LEFT_UP:RunState,LEFT_DOWN:RunState,RIGHT_DOWN:RunState,
               TOP_UP: RunState, UNDER_UP: RunState, TOP_DOWN: RunState, UNDER_DOWN: RunState,
               SHIFT_DOWN: RunState, SHIFT_UP: RunState}
-# fill here
+
 }
 
 
@@ -193,7 +193,7 @@ class Turtle(Character):
 
     def draw(self):
         self.cur_state.draw(self)
-        pass
+
 
         ##적총알 플레이어 타격시 타입이 거북이&스킬중이면 피격x
     def skill(self):
@@ -202,15 +202,14 @@ class Turtle(Character):
             Turtle.bgm.play()
             self.skilltime=pico2d.get_time()
             self.skillCooltime=pico2d.get_time()
-        pass
+
 
 
     def add_event(self, event):
         self.event_que.insert(0,event)
-        pass
+
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
-        pass

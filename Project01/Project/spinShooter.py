@@ -38,14 +38,12 @@ class SpinShooter(Character):
         self.cur_state.enter(self)
         self.score=18
     def update(self,P_bullet_list,player,E_bullet_list):
-        # self.time=(self.time+1)%10
-        # if self.time%10==0:
-        # self.frame=(self.frame+1)%3
+
         self.frame = (self.frame + FRAMES_PER_ENEMY * ACTION_PER_TIME * game_framework.frame_time) % 3
         i=0
         while i < len(P_bullet_list):
             if math.sqrt((P_bullet_list[i].x-self.x)**2+(P_bullet_list[i].y-self.y)**2)<20 :
-                self.hp=self.hp-player.attack
+                self.hp=self.hp-P_bullet_list[i].attack
                 del P_bullet_list[i]
             else:
                 i=i+1
@@ -63,18 +61,18 @@ class SpinShooter(Character):
     def draw(self):
         self.cur_state.draw(self)
         self.locateImage.draw(self.x, 60)
-        pass
+
 
     def change_state(self,  state):
         self.cur_state.exit(self)
         self.cur_state = state
         self.cur_state.enter(self)
-        pass
+
 
 
     def add_event(self, event):
         self.event_que.insert(0,event)
-        pass
+
 
 
 class MoveState:
@@ -95,13 +93,13 @@ class MoveState:
     def draw(Enemy):
         Enemy.image.clip_draw(int(Enemy.frame)* 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
 
-    pass
+
 
 
 class IdleState:
     def enter(Enemy):
         Enemy.shoot_time = pico2d.get_time()
-        pass
+
     def exit(Enemy):
         pass
 
@@ -109,7 +107,7 @@ class IdleState:
     def update(Enemy,E_bullet_list,player):
         if pico2d.get_time()-Enemy.shoot_time>=0.5 :
             Enemy.add_event(ShootState)
-            pass
+
         if pico2d.get_time()-Enemy.lifetime>=18:
             Enemy.moveBit=1
             Enemy.add_event(MoveState)
@@ -134,10 +132,10 @@ class ShootState:
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, -0.0005, 2, 0.0002))
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle+0.05, -0.0005, 2, 0.0002))
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle-0.05, -0.0005, 2, 0.0002))
-            pass
+
 
         Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
         Enemy.add_event(IdleState)
-    @staticmethod
+
     def draw(Enemy):
         Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)

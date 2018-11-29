@@ -28,7 +28,8 @@ ROT_SPEED_TPS = 250
 
 fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
 class Player_bullet(Bullet):
-    def __init__(self,x,y):
+    def __init__(self,x,y,attack):
+        self.attack=attack
         super().__init__(x,y)
         Player_bullet.image=load_image(fileLink+'Bullet\\Bullet.png')
     def update(self):
@@ -39,7 +40,6 @@ class Player_bullet(Bullet):
     def draw(self,player):
         Player_bullet.image.clip_draw((2 - player.Type) * 10, 0, 10, 10, self.x, self.y)
 
-##bullet_image=load_image('Bullet.png')
 
 class Enemy_bullet(Bullet):
     def __init__(self,x,y,angle,angle_rate,speed,speed_rate):
@@ -65,5 +65,3 @@ class Enemy_bullet(Bullet):
     def draw(self,player):
         self.image.clip_draw(int(self.frame)* 30, 0, 30, 30, self.x, self.y)
 
-#Enemy.y = Enemy.y-3*math.sin(0.125*3.1415*2)
- #       Enemy.x = Enemy.x + 3 *math.cos(0.125 * 3.1415*2)

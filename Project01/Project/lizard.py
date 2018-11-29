@@ -69,7 +69,7 @@ class RunState:
             elif Lizard.velocityY < 0:
                 Lizard.velocityY += SLOW_SPEED_PPS
             Lizard.speed = RUN_SPEED_PPS-SLOW_SPEED_PPS
-            pass
+
         elif event == SHIFT_UP:
             if Lizard.velocityX > 0:
                 Lizard.velocityX += SLOW_SPEED_PPS
@@ -80,7 +80,7 @@ class RunState:
             elif Lizard.velocityY < 0:
                 Lizard.velocityY -= SLOW_SPEED_PPS
             Lizard.speed = RUN_SPEED_PPS
-            pass
+
 
         Lizard.dir=Lizard.velocityX
 
@@ -105,7 +105,7 @@ class RunState:
         Lizard.check_collision()
 
         if pico2d.get_time()-Lizard.shoottime>=0.15 :  #일종의 타이머로 총알 생성
-            P_bullet_list.append(Player_bullet(Lizard.x, Lizard.y))
+            P_bullet_list.append(Player_bullet(Lizard.x, Lizard.y,Lizard.attack))
             Lizard.shoottime=get_time()
 
 
@@ -193,7 +193,7 @@ class Lizard(Character):
 
     def draw(self):
         self.cur_state.draw(self)
-        pass
+
 
         ##적총알 플레이어 타격시 타입이 거북이&스킬중이면 피격x
     def skill(self):
@@ -206,29 +206,15 @@ class Lizard(Character):
             self.attack=4
 
 
-    #def change_state(self,  state):
-     #   self.cur_state.exit(self,key_event)
-        #if state==IdleState:
-            #if len(move_list) > 0:
-             #   del move_list[0]
-            #if len(move_list)>0:
-            #    pass
-            #else:
-#                self.cur_state=state
 
- #       if state == RunState:
-  #          move_list.append(state)
-      #  self.cur_state = state
-       # self.cur_state.enter(self,event)
-        pass
+
 
 
     def add_event(self, event):
         self.event_que.insert(0,event)
-        pass
+
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
-        pass

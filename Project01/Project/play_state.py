@@ -57,7 +57,7 @@ class BackGround:
         pass
     def draw(self):
         BackGround.Image.draw(GAME_WIDTH / 2, GAME_HEIGHT / 2)
-        pass
+
     def exit(self):
         BackGround.bgm.stop()
 
@@ -67,7 +67,7 @@ def enter():
     global backGround,score,player,life,P_bullet_list,E_time,B_time,count,admin
     backGround=BackGround()
     player=Player_type_table[start_state.character](590/2,100,3)
-    P_bullet_list = [Player_bullet(player.x,player.y)]
+    P_bullet_list = []
     score=Score()
     count = 1
     admin=Administrator()
@@ -76,7 +76,7 @@ def enter():
     B_time = pico2d.get_time()
 def pause():
     backGround.exit()
-    pass
+
 
 
 def exit():
@@ -106,7 +106,7 @@ def pause():
 
 def turn_on_music():
     backGround.bgm.repeat_play()
-    pass
+
 
 
 def resume():

@@ -19,29 +19,32 @@ class BackGround:
         BackGround.bgm.set_volume(20)
         BackGround.bgm.repeat_play()
         BackGround.bestBgm=load_wav(fileLink + 'Screen\\bestScore.wav')
+
         BackGround.bestBgm.set_volume(60)
         if play_state.score_renew:
+            play_state.score_renew=False
             BackGround.bestBgm.play()
     def update(self):
         pass
     def draw(self):
         BackGround.Image.draw(GAME_WIDTH / 2, GAME_HEIGHT / 2)
-        pass
+
     def exit(self):
         BackGround.bgm.stop()
+        BackGround.bestBgm.set_volume(0)
 
 def enter():
     global background,currentScoreImage,bestScoreImage
     background=BackGround()
     bestScoreImage = load_image(fileLink + 'Screen\\bestscore.png')
     currentScoreImage = load_image(fileLink + 'Screen\\currentscore.png')
-    pass
+
 
 def pause():
     pass
 def turn_on_music():
     background.bgm.repeat_play()
-    pass
+
 def exit():
     global background,currentScoreImage,bestScoreImage
     background.exit()
@@ -72,4 +75,4 @@ def draw():
     start_state.bestScore.draw(450,130)
     play_state.score.draw(450,30)
     update_canvas()
-    pass
+

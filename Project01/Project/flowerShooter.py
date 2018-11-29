@@ -47,7 +47,7 @@ class FlowerShooter(Character):
 
         while i < len(P_bullet_list):
             if math.sqrt((P_bullet_list[i].x-self.x)**2+(P_bullet_list[i].y-self.y)**2)<35 :
-                self.hp=self.hp-player.attack
+                self.hp=self.hp-P_bullet_list[i].attack
                 del P_bullet_list[i]
             else:
                 i=i+1
@@ -65,18 +65,18 @@ class FlowerShooter(Character):
     def draw(self):
         self.cur_state.draw(self)
         self.locateImage.draw(self.x, 60)
-        pass
+
 
     def change_state(self,  state):
         self.cur_state.exit(self)
         self.cur_state = state
         self.cur_state.enter(self)
-        pass
+
 
 
     def add_event(self, event):
         self.event_que.insert(0,event)
-        pass
+
 
 
 class MoveState:
@@ -97,25 +97,23 @@ class MoveState:
     def draw(Enemy):
         Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y,160,160)
 
-    pass
 
 
 class IdleState:
     def enter(Enemy):
         Enemy.shoot_time = pico2d.get_time()
-        pass
+
     def exit(Enemy):
         pass
 
-    @staticmethod
+
     def update(Enemy,E_bullet_list,player):
         if pico2d.get_time()-Enemy.shoot_time>=0.2 :
             Enemy.add_event(ShootState)
-            pass
+
         if pico2d.get_time()-Enemy.lifetime>=30:
             Enemy.moveBit=1
             Enemy.add_event(MoveState)
-    @staticmethod
     def draw(Enemy):
         Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y,160,160)
 
@@ -140,7 +138,7 @@ class ShootState:
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, -Enemy.shoot_angle + 0.75, 0, 2, 0))
 
 
-            pass
+
         elif Enemy.pattern==2:
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 2, 0))
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle + 0.5, 0, 2, 0))
@@ -150,9 +148,8 @@ class ShootState:
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, -(Enemy.shoot_angle+0.01) + 0.5, 0, 2, 0))
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, -(Enemy.shoot_angle+0.01) + 0.25, 0, 2, 0))
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, -(Enemy.shoot_angle+0.01) + 0.75, 0, 2, 0))
-            pass
+
         Enemy.shoot_angle = (Enemy.shoot_angle + Enemy.angle_rate) % 360
-        pass
         Enemy.add_event(IdleState)
 
     @staticmethod

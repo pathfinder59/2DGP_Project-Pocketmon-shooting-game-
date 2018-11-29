@@ -43,7 +43,7 @@ class AimShooter(Character):
         i=0
         while i < len(P_bullet_list):
             if math.sqrt((P_bullet_list[i].x-self.x)**2+(P_bullet_list[i].y-self.y)**2)<20 :
-                self.hp=self.hp-player.attack
+                self.hp=self.hp-P_bullet_list[i].attack
                 del P_bullet_list[i]
             else:
                 i=i+1
@@ -61,18 +61,18 @@ class AimShooter(Character):
     def draw(self):
         self.cur_state.draw(self)
         self.locateImage.draw(self.x,60)
-        pass
+
 
     def change_state(self,  state):
         self.cur_state.exit(self)
         self.cur_state = state
         self.cur_state.enter(self)
-        pass
+
 
 
     def add_event(self, event):
         self.event_que.insert(0,event)
-        pass
+
 
 
 class MoveState:
@@ -92,21 +92,19 @@ class MoveState:
     def draw(Enemy):
         Enemy.image.clip_draw(int(Enemy.frame) * 70, Enemy.type * 80, 70, 80, Enemy.x, Enemy.y)
 
-    pass
 
 
 class IdleState:
     def enter(Enemy):
         Enemy.shoot_time = pico2d.get_time()
-        pass
+
     def exit(Enemy):
         pass
 
-    @staticmethod
     def update(Enemy,E_bullet_list,player):
         if pico2d.get_time()-Enemy.shoot_time>=0.5 :
             Enemy.add_event(ShootState)
-            pass
+
         if pico2d.get_time()-Enemy.lifetime>=18:
             Enemy.moveBit=1
             Enemy.add_event(MoveState)
@@ -128,10 +126,10 @@ class ShootState:
 
         if Enemy.pattern==1:
             E_bullet_list.append(Enemy_bullet(Enemy.x,Enemy.y,Enemy.shoot_angle,0,2,0))
-            pass
+
         elif Enemy.pattern==2:
             E_bullet_list.append(Enemy_bullet(Enemy.x, Enemy.y, Enemy.shoot_angle, 0, 3, 0))
-            pass
+
         Enemy.add_event(IdleState)
 
     @staticmethod

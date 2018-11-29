@@ -69,7 +69,7 @@ class RunState:
             elif Grass.velocityY < 0:
                 Grass.velocityY += SLOW_SPEED_PPS
             Grass.speed = RUN_SPEED_PPS-SLOW_SPEED_PPS
-            pass
+
         elif event == SHIFT_UP:
             if Grass.velocityX > 0:
                 Grass.velocityX += SLOW_SPEED_PPS
@@ -80,7 +80,7 @@ class RunState:
             elif Grass.velocityY < 0:
                 Grass.velocityY -= SLOW_SPEED_PPS
             Grass.speed = RUN_SPEED_PPS
-            pass
+
 
         Grass.dir=Grass.velocityX
 
@@ -104,7 +104,7 @@ class RunState:
         Grass.check_collision()
 
         if pico2d.get_time()-Grass.shoottime>=0.15 :  #일종의 타이머로 총알 생성
-            P_bullet_list.append(Player_bullet(Grass.x, Grass.y))
+            P_bullet_list.append(Player_bullet(Grass.x, Grass.y,Grass.attack))
             Grass.shoottime=get_time()
 
 
@@ -119,14 +119,13 @@ class RunState:
         Grass.image.clip_draw(int(Grass.frame) * 40, 40 * 2, 40, 40, Grass.x, Grass.y)
         if Grass.skillSwitch:
             Grass.skill_image.clip_draw(int(Grass.skillframe)*50,50*2,50,50,Grass.x,Grass.y)
-            pass
+
 
 
 next_state_table = {
     RunState:{RIGHT_UP:RunState,LEFT_UP:RunState,LEFT_DOWN:RunState,RIGHT_DOWN:RunState,
               TOP_UP: RunState, UNDER_UP: RunState, TOP_DOWN: RunState, UNDER_DOWN: RunState,
               SHIFT_DOWN: RunState, SHIFT_UP: RunState}
-# fill here
 }
 
 
@@ -191,7 +190,7 @@ class Grass(Character):
 
     def draw(self):
         self.cur_state.draw(self)
-        pass
+
 
         ##적총알 플레이어 타격시 타입이 거북이&스킬중이면 피격x
     def skill(self):
@@ -205,10 +204,9 @@ class Grass(Character):
 
     def add_event(self, event):
         self.event_que.insert(0,event)
-        pass
+
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
-        pass

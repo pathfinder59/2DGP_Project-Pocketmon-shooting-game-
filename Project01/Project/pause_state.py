@@ -25,13 +25,13 @@ def enter():
     global pauseImage,pauseTime
     pauseImage=load_image(fileLink+'Screen\\pause.png')
     pauseTime = pico2d.get_time()
-    pass
+
 
 
 def exit():
     global pauseImage
     del(pauseImage)
-    pass
+
 
 def pause():
     pass

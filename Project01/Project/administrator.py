@@ -58,10 +58,10 @@ class Administrator:
         make_adjust_node=SelectorNode("MakeAdjust")
         make_adjust_node.add_children(makeEnemy_node,adjustEnemy_node)
         self.bt=BehaviorTree(make_adjust_node)
-        pass
+
 
 
 
     def update(self):
         self.bt.run()
-        pass
+

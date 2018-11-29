@@ -26,4 +26,3 @@ class Score:
             Score.image.clip_draw(j * 32, 0, 32, 60, x - (32 * i), y)
             i = i + 1
             Game_score = Game_score // 10
-    pass

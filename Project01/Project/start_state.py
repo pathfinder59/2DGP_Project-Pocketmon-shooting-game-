@@ -33,14 +33,14 @@ class BackGround:
         pass
     def draw(self):
         BackGround.Image.draw(GAME_WIDTH / 2, GAME_HEIGHT / 2)
-        pass
+
     def exit(self):
         BackGround.bgm.stop()
 class Pointer:
     def __init__(self):
         self.x=GAME_WIDTH/2
         self.y=50
-        pass
+
 def enter():
     global pointer,turtleImage,grassImage,lizardImage,background
     global bestScore
@@ -51,10 +51,10 @@ def enter():
     lizardImage = load_image(fileLink+'SelectImage\\CHAR3.png')
     bestScore = Score()
     load()
-    pass
+
 def turn_on_music():
     background.bgm.repeat_play()
-    pass
+
 
 def exit():
     global turtleImage,grassImage,lizardImage,background,pointer
@@ -73,9 +73,8 @@ def load():
     with open('score.sav', 'rb') as f:
         bestScore = pickle.load(f)
 def pause():
-
     background.exit()
-    pass
+
 def handle_events():
     global character,pointer
 
@@ -111,15 +110,15 @@ def update():
         grassButton = True
     elif pointer.x >= 320 + 65 and pointer.x <= 320 + 65 + 75 + 75 and pointer.y >= 357 - 75 - 75 and pointer.y <= 357:
         lizardButton = True
-    pass
+
 
 
 def draw():
-#595 889
+
     clear_canvas()
     background.draw()
     turtleImage.draw(65 + 75, 357 - 75, 150 + (turtleButton * 40), 150 + (turtleButton * 40))
     grassImage.draw(65 + 75 + 75*2 + 10, 357 - 75, 150 + (grassButton * 40), 150 + (grassButton * 40))
     lizardImage.draw(65 + 75 + 75*4 + 20, 357 - 75, 150 + (lizardButton * 40), 150 + (lizardButton * 40))
     update_canvas()
-    pass
+
