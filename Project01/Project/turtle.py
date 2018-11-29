@@ -112,7 +112,7 @@ class RunState:
             if pico2d.get_time()-Turtle.hitcount>=3:
                 Turtle.image.opacify(1)
                 Turtle.hitSwitch=False
-        if pico2d.get_time() - Turtle.skillCooltime >= 30:
+        if pico2d.get_time() - Turtle.skillCooltime >= 40:
             Turtle.skill_icon.draw(20,150)
 
         Turtle.image.clip_draw(int(Turtle.frame) * 40, 0, 40, 40, Turtle.x, Turtle.y)
@@ -141,7 +141,7 @@ class Turtle(Character):
 
         self.skilltime=None
         self.skillframe=0
-        self.skillCooltime=pico2d.get_time()-30
+        self.skillCooltime=pico2d.get_time()-40
         self.speed=RUN_SPEED_PPS
         self.skillSwitch=False
         self.hitSwitch=False
@@ -197,7 +197,7 @@ class Turtle(Character):
 
         ##적총알 플레이어 타격시 타입이 거북이&스킬중이면 피격x
     def skill(self):
-        if pico2d.get_time()-self.skillCooltime>=30:
+        if pico2d.get_time()-self.skillCooltime>=40:
             self.skillSwitch=True
             Turtle.bgm.play()
             self.skilltime=pico2d.get_time()

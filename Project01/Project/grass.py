@@ -195,11 +195,12 @@ class Grass(Character):
         ##적총알 플레이어 타격시 타입이 거북이&스킬중이면 피격x
     def skill(self):
         if pico2d.get_time()-self.skillCooltime>=30:
-            self.skillSwitch=True
-            Grass.bgm.play()
-            self.skilltime=pico2d.get_time()
-            self.skillCooltime=pico2d.get_time()
-            self.hp=self.hp+1
+            if self.hp<3:
+                self.skillSwitch=True
+                Grass.bgm.play()
+                self.skilltime=pico2d.get_time()
+                self.skillCooltime=pico2d.get_time()
+                self.hp=self.hp+1
 
 
     def add_event(self, event):
