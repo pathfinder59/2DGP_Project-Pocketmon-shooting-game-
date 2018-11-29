@@ -8,17 +8,17 @@ name = "OverState"
 background = None
 bestScoreImage=None
 currentScoreImage=None
-fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
+
 GAME_HEIGHT = 875
 GAME_WIDTH = 590
 
 class BackGround:
     def __init__(self):
-        BackGround.Image = load_image(fileLink + 'Screen\\GAMEOVER.png')
-        BackGround.bgm=load_music(fileLink+'Screen\\overMusic.mp3')
+        BackGround.Image = load_image('./Screen/GAMEOVER.png')
+        BackGround.bgm=load_music('./Screen/overMusic.mp3')
         BackGround.bgm.set_volume(20)
         BackGround.bgm.repeat_play()
-        BackGround.bestBgm=load_wav(fileLink + 'Screen\\bestScore.wav')
+        BackGround.bestBgm=load_wav('./Screen/bestScore.wav')
 
         BackGround.bestBgm.set_volume(60)
         if play_state.score_renew:
@@ -36,8 +36,8 @@ class BackGround:
 def enter():
     global background,currentScoreImage,bestScoreImage
     background=BackGround()
-    bestScoreImage = load_image(fileLink + 'Screen\\bestscore.png')
-    currentScoreImage = load_image(fileLink + 'Screen\\currentscore.png')
+    bestScoreImage = load_image('./Screen/bestscore.png')
+    currentScoreImage = load_image('./Screen/currentscore.png')
 
 
 def pause():

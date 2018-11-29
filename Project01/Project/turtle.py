@@ -4,9 +4,9 @@ import os
 import game_framework
 from pico2d import *
 import math
-#import pause_state
 
-fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
+
+
 from gameBullet import Player_bullet
 from character import Character
 import play_state
@@ -146,11 +146,11 @@ class Turtle(Character):
         self.skillSwitch=False
         self.hitSwitch=False
         self.hitcount=0
-        Turtle.image = load_image(fileLink+'Character\\player1.png')
-        Turtle.skill_image=load_image(fileLink+'Skill\\skill.png')
-        Turtle.skill_icon = load_image(fileLink + 'Skill\\shieldSkill.png')
+        Turtle.image = load_image('./Character/player1.png')
+        Turtle.skill_image=load_image('./Skill/skill.png')
+        Turtle.skill_icon = load_image('./Skill/shieldSkill.png')
 
-        Turtle.bgm = load_wav(fileLink + 'Skill\\shield.wav')
+        Turtle.bgm = load_wav('./Skill/shield.wav')
         Turtle.bgm.set_volume(70)
         self.dir = 1
         self.velocityX = 0

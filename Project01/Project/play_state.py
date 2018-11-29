@@ -43,14 +43,14 @@ score=None
 player=None
 life=None
 backGround=None
-fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
+
 E_time=None
 score_renew=False
 
 class BackGround:
     def __init__(self):
-        BackGround.Image = load_image(fileLink + 'Screen\\GAMEPrint.png')
-        BackGround.bgm=load_music(fileLink+'Screen\\playMusic.mp3')
+        BackGround.Image = load_image('./Screen/GAMEPrint.png')
+        BackGround.bgm=load_music('./Screen/playMusic.mp3')
         BackGround.bgm.set_volume(40)
         BackGround.bgm.repeat_play()
     def update(self):

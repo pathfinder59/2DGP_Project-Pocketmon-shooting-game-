@@ -26,12 +26,12 @@ FRAMES_PER_BULLET = 8
 
 ROT_SPEED_TPS = 250
 
-fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
+
 class Player_bullet(Bullet):
     def __init__(self,x,y,attack):
         self.attack=attack
         super().__init__(x,y)
-        Player_bullet.image=load_image(fileLink+'Bullet\\Bullet.png')
+        Player_bullet.image=load_image('./Bullet/Bullet.png')
     def update(self):
         self.y=self.y+SHOT_SPEED_PPS*game_framework.frame_time
         if self.y > 875:
@@ -49,7 +49,7 @@ class Enemy_bullet(Bullet):
         self.speed=speed
         self.speed_rate=speed_rate
         self.frame=0
-        Enemy_bullet.image = load_image(fileLink+'Bullet\\Poketball.png') #frame&7 조절 하나당 크기10x10
+        Enemy_bullet.image = load_image('./Bullet/Poketball.png') #frame&7 조절 하나당 크기10x10
     def update(self):
         global PI
         self.frame = (self.frame + FRAMES_PER_BULLET*ACTION_PER_TIME*game_framework.frame_time) % 8

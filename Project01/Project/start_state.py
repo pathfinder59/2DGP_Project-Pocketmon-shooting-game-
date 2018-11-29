@@ -20,13 +20,13 @@ character = None
 background = None
 pointer=None
 
-fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
+
 
 
 class BackGround:
     def __init__(self):
-        BackGround.Image = load_image(fileLink + 'Screen\\gamestart.png')
-        BackGround.bgm=load_music(fileLink+'Screen\\startMusic.mp3')
+        BackGround.Image = load_image('./Screen/gamestart.png')
+        BackGround.bgm=load_music('./Screen/startMusic.mp3')
         BackGround.bgm.set_volume(40)
         BackGround.bgm.repeat_play()
     def update(self):
@@ -46,9 +46,9 @@ def enter():
     global bestScore
     pointer=Pointer()
     background=BackGround()
-    turtleImage = load_image(fileLink+'SelectImage\\CHAR1.png')
-    grassImage = load_image(fileLink+'SelectImage\\CHAR2.png')
-    lizardImage = load_image(fileLink+'SelectImage\\CHAR3.png')
+    turtleImage = load_image('./SelectImage/CHAR1.png')
+    grassImage = load_image('./SelectImage/CHAR2.png')
+    lizardImage = load_image('./SelectImage/CHAR3.png')
     bestScore = Score()
     load()
 

@@ -6,7 +6,7 @@ from pico2d import *
 import math
 #import pause_state
 
-fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
+
 from gameBullet import Player_bullet
 from character import Character
 import play_state
@@ -148,11 +148,11 @@ class Lizard(Character):
         self.skillSwitch=False
         self.hitSwitch=False
         self.hitcount=0
-        Lizard.image = load_image(fileLink+'Character\\player1.png')
-        Lizard.skill_image=load_image(fileLink+'Skill\\skill.png')
-        Lizard.skill_icon=load_image(fileLink+'Skill\\attackSkill.png')
+        Lizard.image = load_image('./Character/player1.png')
+        Lizard.skill_image=load_image('./Skill/skill.png')
+        Lizard.skill_icon=load_image('./Skill/attackSkill.png')
 
-        Lizard.bgm = load_wav(fileLink + 'Skill\\attack.wav')
+        Lizard.bgm = load_wav('./Skill/attack.wav')
         Lizard.bgm.set_volume(70)
 
 

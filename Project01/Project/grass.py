@@ -6,7 +6,7 @@ from pico2d import *
 import math
 #import pause_state
 
-fileLink='C:\\Users\\jack\Documents\\GitHub\\2DGP_Project\\Project01\\Project\\'
+
 from gameBullet import Player_bullet
 from character import Character
 import play_state
@@ -146,11 +146,11 @@ class Grass(Character):
         self.skillSwitch=False
         self.hitSwitch=False
         self.hitcount=0
-        Grass.image = load_image(fileLink+'Character\\player1.png')
-        Grass.skill_image=load_image(fileLink+'Skill\\skill.png')
-        Grass.skill_icon = load_image(fileLink + 'Skill\\healSkill.png')
+        Grass.image = load_image('./Character/player1.png')
+        Grass.skill_image=load_image('./Skill/skill.png')
+        Grass.skill_icon = load_image('./Skill/healSkill.png')
 
-        Grass.bgm = load_wav(fileLink + 'Skill\\heal.wav')
+        Grass.bgm = load_wav('./Skill/heal.wav')
         Grass.bgm.set_volume(70)
 
         self.dir = 1
