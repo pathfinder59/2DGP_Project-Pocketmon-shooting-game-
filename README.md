@@ -12,6 +12,9 @@ Pokemon Dodge
 
 
 조작
+
 이동 : 방향키
+
 속도 감소: Shift
+
 스킬 사용: Ctrl
