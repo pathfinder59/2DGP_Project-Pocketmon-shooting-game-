@@ -11,6 +11,8 @@ Pokemon Dodge
 개발 환경: Python, pico2D, Pycharm
 
 
+
+
 조작
 
 이동 : 방향키
