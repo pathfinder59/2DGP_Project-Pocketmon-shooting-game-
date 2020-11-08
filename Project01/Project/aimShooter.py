@@ -23,7 +23,7 @@ FRAMES_PER_ENEMY = 3
 
 class AimShooter(Character):
     def __init__(self, x, y):
-        super().__init__(x, y,12)
+        super().__init__(x, y,8)
 
         self.type=3
         self.pattern=random.randint(1,2)

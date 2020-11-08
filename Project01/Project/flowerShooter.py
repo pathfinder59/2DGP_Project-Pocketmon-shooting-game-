@@ -23,7 +23,7 @@ FRAMES_PER_ENEMY = 3
 
 class FlowerShooter(Character):
     def __init__(self, x, y):
-        super().__init__(x, y,20)
+        super().__init__(x, y,15)
 
         self.type=4
         self.pattern=random.randint(1,2)
